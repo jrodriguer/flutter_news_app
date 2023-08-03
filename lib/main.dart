@@ -41,6 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Tab(icon: Icon(Icons.circle)),
             Tab(icon: Icon(Icons.heart_broken_outlined))
           ]),
+          centerTitle: true,
           title: const Text('Tabs Demo'),
         ),
         // body: const TabBarView(
