@@ -37,9 +37,9 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Scaffold(
         appBar: AppBar(
           bottom: const TabBar(tabs: [
-            Tab(icon: Icon(Icons.person_pin_circle_outlined)),
-            Tab(icon: Icon(Icons.circle)),
-            Tab(icon: Icon(Icons.heart_broken_outlined))
+            Tab(icon: Icon(Icons.person)),
+            Tab(icon: Icon(Icons.public)),
+            Tab(icon: Icon(Icons.favorite_border))
           ]),
           centerTitle: true,
           title: const Text('Tabs Demo'),
