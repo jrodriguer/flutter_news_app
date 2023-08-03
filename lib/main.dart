@@ -30,6 +30,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  static const List<Widget> _pages = <Widget>[
+    //
+    //
+    //
+  ];
+
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -45,6 +51,9 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
         title: const Text('Tabs Demo'),
       ),
+      body: Center(
+        child: _pages.elementAt(_selectedIndex),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         mouseCursor: SystemMouseCursors.grab,
         selectedFontSize: 20,
@@ -52,6 +61,10 @@ class _MyHomePageState extends State<MyHomePage> {
             const IconThemeData(color: Colors.lightBlue, size: 40),
         selectedItemColor: Colors.lightBlue,
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+        unselectedIconTheme: const IconThemeData(
+          color: Colors.blueGrey,
+        ),
+        unselectedItemColor: Colors.blueGrey,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
@@ -66,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Favorites',
           ),
         ],
-        currentIndex: _selectedIndex, //New
+        currentIndex: _selectedIndex,
         onTap: _onItemTapped,
       ),
     );
