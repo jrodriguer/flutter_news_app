@@ -32,25 +32,26 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          bottom: const TabBar(tabs: [
-            Tab(icon: Icon(Icons.person)),
-            Tab(icon: Icon(Icons.public)),
-            Tab(icon: Icon(Icons.favorite_border))
-          ]),
-          centerTitle: true,
-          title: const Text('Tabs Demo'),
-        ),
-        // body: const TabBarView(
-        //   children: [
-        //     Text('Tabs Demo 1'),
-        //     Text('Tabs Demo 2'),
-        //     Text('Tabs Demo 3'),
-        //   ],
-        // ),
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('Tabs Demo'),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Personal',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.public),
+            label: 'Headers',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite_border),
+            label: 'Favorites',
+          ),
+        ],
       ),
     );
   }
