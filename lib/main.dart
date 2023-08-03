@@ -46,6 +46,12 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('Tabs Demo'),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        mouseCursor: SystemMouseCursors.grab,
+        selectedFontSize: 20,
+        selectedIconTheme:
+            const IconThemeData(color: Colors.lightBlue, size: 40),
+        selectedItemColor: Colors.lightBlue,
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
