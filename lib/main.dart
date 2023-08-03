@@ -30,6 +30,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,6 +60,8 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Favorites',
           ),
         ],
+        currentIndex: _selectedIndex, //New
+        onTap: _onItemTapped,
       ),
     );
   }
