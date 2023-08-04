@@ -9,8 +9,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class MainScreenState extends State<MainScreen> {
-  var settingsController;
-
   @override
   void initState() {
     super.initState();
