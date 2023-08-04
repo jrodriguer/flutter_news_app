@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_news_app/screens/main.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,58 +31,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  static const List<Widget> _pages = <Widget>[
-    //
-    //
-    //
-  ];
+  @override
+  void initState() {
+    super.initState();
+  }
 
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Tabs Demo'),
-      ),
-      body: Center(
-        child: _pages.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        mouseCursor: SystemMouseCursors.grab,
-        selectedFontSize: 20,
-        selectedIconTheme:
-            const IconThemeData(color: Colors.lightBlue, size: 40),
-        selectedItemColor: Colors.lightBlue,
-        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-        unselectedIconTheme: const IconThemeData(
-          color: Colors.blueGrey,
-        ),
-        unselectedItemColor: Colors.blueGrey,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Personal',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.public),
-            label: 'Headers',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border),
-            label: 'Favorites',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-      ),
-    );
+    return const MainScreen();
   }
 }
