@@ -1,7 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/screens/main.dart';
+import 'package:logger/logger.dart';
+import 'package:flutter/foundation.dart';
 
-void main() {
+bool firstTime = false;
+typedef OnError = void Function(Exception exception);
+Logger logger = Logger(
+  printer: PrettyPrinter(),
+);
+
+logs() {
+  if (kReleaseMode) {
+    Logger.level = Level.warning;
+  }
+  Logger.addLogListener((record) {
+    debugPrint('${record.level.name}: ${record.time}: '
+        // '${record.loggerName}: '
+        '${record.message}');
+  });
+}
+
+Future<void> main() async {
+  logs();
+  logger.i('Going start app');
   runApp(const MyApp());
 }
 
