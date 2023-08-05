@@ -18,7 +18,7 @@ class MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     // settingsController = context.watch<SettingsController>();
 
-    const List<Widget> screens = <Widget>[
+    const List<Widget> _screens = <Widget>[
       Icon(
         Icons.person,
         size: 150,
@@ -33,17 +33,17 @@ class MainScreenState extends State<MainScreen> {
       ),
     ];
 
-    int selectedIndex = 0;
+    int _selectedIndex = 0;
 
-    void onItemTapped(int index) {
+    void _onItemTapped(int index) {
       setState(() {
-        selectedIndex = index;
+        _selectedIndex = index;
       });
     }
 
     return Scaffold(
       backgroundColor: Helpers.hexToColor('#EFE5DE'),
-      body: Center(child: screens.elementAt(selectedIndex)),
+      body: Center(child: _screens.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
         mouseCursor: SystemMouseCursors.grab,
         selectedFontSize: 20,
@@ -69,8 +69,8 @@ class MainScreenState extends State<MainScreen> {
             label: 'Favorites',
           ),
         ],
-        currentIndex: selectedIndex,
-        onTap: onItemTapped,
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
       ),
     );
   }
