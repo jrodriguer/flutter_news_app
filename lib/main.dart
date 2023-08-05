@@ -4,7 +4,16 @@ import 'package:logger/logger.dart';
 import 'package:flutter/foundation.dart';
 
 typedef OnError = void Function(Exception exception);
-Logger logger = Logger(filter: null, printer: PrettyPrinter(), output: null);
+Logger logger = Logger(
+    filter: null,
+    printer: PrettyPrinter(
+        methodCount: 2, // Number of method calls to be displayed
+        errorMethodCount: 8, // Number of method calls if stacktrace is provided
+        lineLength: 120,
+        colors: true,
+        printEmojis: true,
+        printTime: false),
+    output: null);
 
 logs() {
   if (kReleaseMode) {
