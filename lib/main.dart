@@ -14,6 +14,9 @@ Logger logger = Logger(
         printEmojis: true,
         printTime: false),
     output: null);
+Logger loggerNoStack = Logger(
+  printer: PrettyPrinter(methodCount: 0),
+);
 
 logs() {
   if (kReleaseMode) {
@@ -28,7 +31,7 @@ logs() {
 
 Future<void> main() async {
   logs();
-  logger.i('Going start app');
+  loggerNoStack.i('Going full screen');
   runApp(const MyApp());
 }
 
