@@ -3,7 +3,6 @@ import 'package:flutter_news_app/screens/main.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter/foundation.dart';
 
-bool firstTime = false;
 typedef OnError = void Function(Exception exception);
 Logger logger = Logger(
   printer: PrettyPrinter(),
