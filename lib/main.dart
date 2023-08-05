@@ -24,7 +24,6 @@ logs() {
   }
   Logger.addLogListener((record) {
     debugPrint('${record.level.name}: ${record.time}: '
-        // '${record.loggerName}: '
         '${record.message}');
   });
 }
