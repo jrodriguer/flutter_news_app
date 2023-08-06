@@ -3,6 +3,7 @@ import 'package:flutter_news_app/helpers/helpers.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
+  static const String route = '/';
 
   @override
   MainScreenState createState() => MainScreenState();
@@ -18,7 +19,7 @@ class MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     // settingsController = context.watch<SettingsController>();
 
-    const List<Widget> _screens = <Widget>[
+    const List<Widget> _buildBody = <Widget>[
       Icon(
         Icons.person,
         size: 150,
@@ -33,28 +34,30 @@ class MainScreenState extends State<MainScreen> {
       ),
     ];
 
-    int _selectedIndex = 0;
-
-    void _onItemTapped(int index) {
-      setState(() {
-        _selectedIndex = index;
-      });
-    }
+    int index = 0;
 
     return Scaffold(
       backgroundColor: Helpers.hexToColor('#EFE5DE'),
-      body: Center(child: _screens.elementAt(_selectedIndex)),
+      body: Center(child: _buildBody[index]),
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: index,
+        onTap: (i) {
+          setState(() {
+            index = i;
+          });
+        },
+        elevation: 16.0,
+        showUnselectedLabels: true,
+        selectedItemColor: Colors.lightBlue,
+        unselectedItemColor: Colors.blueGrey,
         mouseCursor: SystemMouseCursors.grab,
         selectedFontSize: 20,
         selectedIconTheme:
             const IconThemeData(color: Colors.lightBlue, size: 40),
-        selectedItemColor: Colors.lightBlue,
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
         unselectedIconTheme: const IconThemeData(
           color: Colors.blueGrey,
         ),
-        unselectedItemColor: Colors.blueGrey,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
@@ -69,8 +72,6 @@ class MainScreenState extends State<MainScreen> {
             label: 'Favorites',
           ),
         ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
       ),
     );
   }
