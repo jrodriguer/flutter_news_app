@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_news_app/route_generator.dart';
 import 'package:flutter_news_app/screens/main.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter/foundation.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const MyHomePage(),
+      onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
 }
