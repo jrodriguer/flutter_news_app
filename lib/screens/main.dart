@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/helpers/helpers.dart';
+import 'package:flutter_news_app/screens/favorites.dart';
+import 'package:flutter_news_app/screens/headers.dart';
+import 'package:flutter_news_app/screens/personal.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -20,25 +23,19 @@ class MainScreenState extends State<MainScreen> {
     // settingsController = context.watch<SettingsController>();
 
     const List<Widget> _buildBody = <Widget>[
-      Icon(
-        Icons.person,
-        size: 150,
-      ),
-      Icon(
-        Icons.public,
-        size: 150,
-      ),
-      Icon(
-        Icons.favorite_border,
-        size: 150,
-      ),
+      PersonalScreen(),
+      HeadersScreeen(),
+      FavoritesScreen()
     ];
 
     int index = 0;
 
     return Scaffold(
       backgroundColor: Helpers.hexToColor('#EFE5DE'),
-      body: Center(child: _buildBody[index]),
+      body: IndexedStack(
+        index: index,
+        children: _buildBody,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: index,
         onTap: (i) {
