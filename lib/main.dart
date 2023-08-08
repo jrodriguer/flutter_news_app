@@ -8,8 +8,8 @@ typedef OnError = void Function(Exception exception);
 Logger logger = Logger(
     filter: null,
     printer: PrettyPrinter(
-        methodCount: 2, // Number of method calls to be displayed
-        errorMethodCount: 8, // Number of method calls if stacktrace is provided
+        methodCount: 2,
+        errorMethodCount: 8,
         lineLength: 120,
         colors: true,
         printEmojis: true,
@@ -23,6 +23,7 @@ logs() {
   if (kReleaseMode) {
     Logger.level = Level.warning;
   }
+
   Logger.addLogListener((record) {
     debugPrint('${record.level.name}: ${record.time}: '
         '${record.message}');
