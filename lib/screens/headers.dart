@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_news_app/api/news_service.dart';
+import 'package:flutter_news_app/model/article_model.dart';
+import 'package:flutter_news_app/model/topheadlines_model.dart';
 
 class HeadersScreeen extends StatefulWidget {
   const HeadersScreeen({Key? key}) : super(key: key);
@@ -27,6 +30,10 @@ class _HeadersScreeenState extends State<HeadersScreeen> {
     return tabs;
   }
 
+  List<Article> news = <Article>[];
+  String selectedCategory = '';
+  final NewsService newsService = NewsService();
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -48,6 +55,29 @@ class _HeadersScreeenState extends State<HeadersScreeen> {
                 TabBar(tabs: tabMaker(), isScrollable: true),
               ],
             ),
+          ),
+          body: FutureBuilder<TopHeadlines>(
+            future: newsService.getTopHeadLinesCategory(tabsText[0]),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else if (snapshot.hasData) {
+                final articles = snapshot.data!.articles;
+                return ListView.builder(
+                  itemCount: articles.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(articles[index].title),
+                      // Other fields...
+                    );
+                  },
+                );
+              } else {
+                return const Text('No data available.');
+              }
+            },
           ),
         );
       }),
