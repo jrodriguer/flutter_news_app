@@ -66,7 +66,7 @@ class _HeadersScreeenState extends State<HeadersScreeen> {
                 newsService.getTopHeadLinesCategory(tabsText[currentTabIndex]),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
+                return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
                 logger.e('${snapshot.error}');
                 return Center(child: Text('Error: ${snapshot.error}'));
