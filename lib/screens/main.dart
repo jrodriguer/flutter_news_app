@@ -31,12 +31,13 @@ class MainScreenState extends State<MainScreen> {
     ];
 
     return Scaffold(
-      backgroundColor: Helpers.hexToColor('#EFE5DE'),
+      backgroundColor: Helpers.hexToColor('#FFFBF5'),
       body: IndexedStack(
         index: index,
         children: _buildBody,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Helpers.hexToColor('#F7EFE5'),
         currentIndex: index,
         onTap: (i) {
           setState(() {
@@ -45,15 +46,15 @@ class MainScreenState extends State<MainScreen> {
         },
         elevation: 16.0,
         showUnselectedLabels: true,
-        selectedItemColor: Colors.lightBlue,
-        unselectedItemColor: Colors.blueGrey,
+        selectedItemColor: Helpers.hexToColor('#674188'),
+        unselectedItemColor: Helpers.hexToColor('#C3ACD0'),
         mouseCursor: SystemMouseCursors.grab,
         selectedFontSize: 20,
         selectedIconTheme:
-            const IconThemeData(color: Colors.lightBlue, size: 40),
+            IconThemeData(color: Helpers.hexToColor('#674188'), size: 40),
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-        unselectedIconTheme: const IconThemeData(
-          color: Colors.blueGrey,
+        unselectedIconTheme: IconThemeData(
+          color: Helpers.hexToColor('#C3ACD0'),
         ),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
