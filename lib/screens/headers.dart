@@ -27,23 +27,30 @@ class _HeadersScreeenState extends State<HeadersScreeen> {
     return tabs;
   }
 
-  String selectedCategory = '';
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       initialIndex: 1,
       length: tabsText.length,
-      child: Scaffold(
-        appBar: AppBar(
-          flexibleSpace: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              TabBar(tabs: tabMaker(), isScrollable: true),
-            ],
+      child: Builder(builder: (BuildContext context) {
+        final TabController tabController = DefaultTabController.of(context);
+        tabController.addListener(() {
+          if (!tabController.indexIsChanging) {
+            // Your code goes here.
+            // To get index of current tab use tabController.index
+          }
+        });
+        return Scaffold(
+          appBar: AppBar(
+            flexibleSpace: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                TabBar(tabs: tabMaker(), isScrollable: true),
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }
