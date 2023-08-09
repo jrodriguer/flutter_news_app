@@ -13,6 +13,8 @@ class MainScreen extends StatefulWidget {
 }
 
 class MainScreenState extends State<MainScreen> {
+  int index = 0;
+
   @override
   void initState() {
     super.initState();
@@ -27,8 +29,6 @@ class MainScreenState extends State<MainScreen> {
       HeadersScreeen(),
       FavoritesScreen()
     ];
-
-    int index = 0;
 
     return Scaffold(
       backgroundColor: Helpers.hexToColor('#EFE5DE'),
