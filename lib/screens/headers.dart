@@ -11,10 +11,7 @@ class _HeadersScreeenState extends State<HeadersScreeen> {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Icon(
-        Icons.public,
-        size: 150,
-      ),
+      child: Text('Headers'),
     );
   }
 }
