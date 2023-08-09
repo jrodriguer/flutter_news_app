@@ -35,6 +35,7 @@ class _HeadersScreeenState extends State<HeadersScreeen> {
   List<Article> news = <Article>[];
   String selectedCategory = '';
   final NewsService newsService = NewsService();
+  int currentTabIndex = 0;
   Logger logger = Logger(printer: PrettyPrinter());
 
   @override
@@ -46,8 +47,9 @@ class _HeadersScreeenState extends State<HeadersScreeen> {
         final TabController tabController = DefaultTabController.of(context);
         tabController.addListener(() {
           if (!tabController.indexIsChanging) {
-            // Your code goes here.
-            // To get index of current tab use tabController.index
+            setState(() {
+              currentTabIndex = tabController.index;
+            });
           }
         });
         return Scaffold(
@@ -60,7 +62,8 @@ class _HeadersScreeenState extends State<HeadersScreeen> {
             ),
           ),
           body: FutureBuilder<TopHeadlines>(
-            future: newsService.getTopHeadLinesCategory(tabsText[0]),
+            future:
+                newsService.getTopHeadLinesCategory(tabsText[currentTabIndex]),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const CircularProgressIndicator();
