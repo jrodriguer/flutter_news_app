@@ -2,7 +2,10 @@ import 'package:flutter_news_app/model/topheadlines_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
+import 'package:logger/logger.dart';
+
 class NewsService {
+  Logger logger = Logger(printer: PrettyPrinter());
   static const String _apiKey = 'YOUR_API_KEY';
   static const String _baseUrl = 'https://newsapi.org/v2';
   int _headLinesPage = 0;
@@ -13,8 +16,10 @@ class NewsService {
     final url = '$_baseUrl$query&apiKey=$_apiKey';
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
+      logger.i('Good load data');
       return topHeadlinesFromJson(response.body);
     } else {
+      logger.e('Failed to load data');
       throw Exception('Failed to load data');
     }
   }
