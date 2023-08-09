@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/api/news_service.dart';
+import 'package:flutter_news_app/main.dart';
 import 'package:flutter_news_app/model/article_model.dart';
 import 'package:flutter_news_app/model/topheadlines_model.dart';
+import 'package:logger/logger.dart';
 
 class HeadersScreeen extends StatefulWidget {
   const HeadersScreeen({Key? key}) : super(key: key);
@@ -33,6 +35,7 @@ class _HeadersScreeenState extends State<HeadersScreeen> {
   List<Article> news = <Article>[];
   String selectedCategory = '';
   final NewsService newsService = NewsService();
+  Logger logger = Logger(printer: PrettyPrinter());
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +65,7 @@ class _HeadersScreeenState extends State<HeadersScreeen> {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const CircularProgressIndicator();
               } else if (snapshot.hasError) {
+                logger.e('${snapshot.error}');
                 return Center(child: Text('Error: ${snapshot.error}'));
               } else if (snapshot.hasData) {
                 final articles = snapshot.data!.articles;
