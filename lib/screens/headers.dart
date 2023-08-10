@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/api/news_service.dart';
 import 'package:flutter_news_app/helpers/helpers.dart';
-import 'package:flutter_news_app/main.dart';
 import 'package:flutter_news_app/model/article_model.dart';
 import 'package:flutter_news_app/model/topheadlines_model.dart';
 import 'package:logger/logger.dart';
@@ -44,29 +43,28 @@ class _HeadersScreeenState extends State<HeadersScreeen> {
     return DefaultTabController(
       initialIndex: 1,
       length: tabsText.length,
-      child: Builder(builder: (BuildContext context) {
-        final TabController tabController = DefaultTabController.of(context);
-        tabController.addListener(() {
-          if (!tabController.indexIsChanging) {
-            setState(() {
-              currentTabIndex = tabController.index;
-            });
-          }
-        });
-        return Scaffold(
-          appBar: AppBar(
-            flexibleSpace: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                TabBar(
-                  tabs: tabMaker(),
+      child: Scaffold(
+        body: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                title: const Text('Headers'),
+                pinned: true,
+                floating: true,
+                bottom: TabBar(
                   isScrollable: true,
+                  tabs: tabMaker(),
                   indicatorColor: Helpers.hexToColor('#674188'),
                   indicatorWeight: 3,
+                  onTap: (index) {
+                    setState(() {
+                      currentTabIndex = index;
+                    });
+                  },
                 ),
-              ],
-            ),
-          ),
+              ),
+            ];
+          },
           body: FutureBuilder<TopHeadlines>(
             future:
                 newsService.getTopHeadLinesCategory(tabsText[currentTabIndex]),
@@ -88,12 +86,13 @@ class _HeadersScreeenState extends State<HeadersScreeen> {
                   },
                 );
               } else {
+                logger.e('No data available.');
                 return const Text('No data available.');
               }
             },
           ),
-        );
-      }),
+        ),
+      ),
     );
   }
 }
