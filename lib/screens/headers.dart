@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/api/news_service.dart';
+import 'package:flutter_news_app/helpers/helpers.dart';
 import 'package:flutter_news_app/main.dart';
 import 'package:flutter_news_app/model/article_model.dart';
 import 'package:flutter_news_app/model/topheadlines_model.dart';
@@ -57,7 +58,12 @@ class _HeadersScreeenState extends State<HeadersScreeen> {
             flexibleSpace: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                TabBar(tabs: tabMaker(), isScrollable: true),
+                TabBar(
+                  tabs: tabMaker(),
+                  isScrollable: true,
+                  indicatorColor: Helpers.hexToColor('#674188'),
+                  indicatorWeight: 3,
+                ),
               ],
             ),
           ),
