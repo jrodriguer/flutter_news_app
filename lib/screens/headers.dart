@@ -48,6 +48,7 @@ class _HeadersScreeenState extends State<HeadersScreeen> {
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
+                backgroundColor: Helpers.hexToColor('#F7EFE5'),
                 title: const Text('Headers'),
                 pinned: true,
                 floating: true,
@@ -76,15 +77,16 @@ class _HeadersScreeenState extends State<HeadersScreeen> {
                 return Center(child: Text('Error: ${snapshot.error}'));
               } else if (snapshot.hasData) {
                 final articles = snapshot.data!.articles;
-                return ListView.builder(
-                  itemCount: articles.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(articles[index].title),
-                      // Other fields...
-                    );
-                  },
-                );
+                return LayoutBuilder(builder: (context, constraints) {
+                  return GridView.builder(
+                    itemCount: articles.length,
+                    padding: const EdgeInsets.all(10),
+                    itemBuilder: (context, index) => ItemTile(articles[index]),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: constraints.maxWidth > 700 ? 4 : 1,
+                        childAspectRatio: 2),
+                  );
+                });
               } else {
                 logger.e('No data available.');
                 return const Text('No data available.');
@@ -92,6 +94,32 @@ class _HeadersScreeenState extends State<HeadersScreeen> {
             },
           ),
         ),
+      ),
+    );
+  }
+}
+
+class ItemTile extends StatelessWidget {
+  final Article article;
+
+  const ItemTile(this.article, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListTile(
+        tileColor: Colors.grey.withOpacity(0.5),
+        onTap: () {},
+        leading: Container(
+          width: 50,
+          height: 30,
+          color: Colors.grey.withOpacity(0.5),
+          child: const Placeholder(
+            color: Colors.green,
+          ),
+        ),
+        title: Text(article.author ?? ''),
       ),
     );
   }
