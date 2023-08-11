@@ -1,4 +1,4 @@
-import 'package:flutter_news_app/model/source_model.dart';
+import 'package:flutter_news_app/models/source.dart';
 
 class Article {
   Source source;

@@ -1,4 +1,4 @@
-import 'package:flutter_news_app/model/topheadlines_model.dart';
+import 'package:flutter_news_app/models/topheadlines.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
@@ -6,7 +6,7 @@ import 'package:logger/logger.dart';
 
 class NewsService {
   Logger logger = Logger(printer: PrettyPrinter());
-  static const String _apiKey = 'YOUR_API_KEY';
+  static const String _apiKey = '978764b3fe6b412f8517a7d9c0a1e140';
   static const String _baseUrl = 'https://newsapi.org/v2';
   int _headLinesPage = 0;
   String _categoryAct = '';

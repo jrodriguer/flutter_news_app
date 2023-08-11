@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_news_app/model/article_model.dart';
+import 'package:flutter_news_app/models/article.dart';
 
 TopHeadlines topHeadlinesFromJson(String str) =>
     TopHeadlines.fromJson(json.decode(str));

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_news_app/api/news_service.dart';
+import 'package:flutter_news_app/services/news.dart';
 import 'package:flutter_news_app/helpers/helpers.dart';
-import 'package:flutter_news_app/model/article_model.dart';
-import 'package:flutter_news_app/model/topheadlines_model.dart';
+import 'package:flutter_news_app/models/article.dart';
+import 'package:flutter_news_app/models/topheadlines.dart';
 import 'package:logger/logger.dart';
 
 class HeadersScreeen extends StatefulWidget {
