@@ -14,13 +14,18 @@ class NewsService {
 
   Future<TopHeadlines> _startQuery(String query) async {
     final url = '$_baseUrl$query&apiKey=$_apiKey';
-    final response = await http.get(Uri.parse(url));
-    if (response.statusCode == 200) {
-      logger.i('Good load data');
-      return topHeadlinesFromJson(response.body);
-    } else {
-      logger.e('Failed to load data');
-      throw Exception('Failed to load data');
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        logger.i('Good load data');
+        return topHeadlinesFromJson(response.body);
+      } else {
+        logger.e('Failed to load data');
+        throw Exception('Failed to load data');
+      }
+    } catch (e) {
+      logger.e('An error occurred: $e');
+      throw Exception('An error occurred while fetching data');
     }
   }
 
