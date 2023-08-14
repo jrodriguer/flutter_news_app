@@ -4,12 +4,10 @@ import 'package:flutter_news_app/widgets/new_card.dart';
 
 class NewsGrid extends StatelessWidget {
   final List<Article> news;
-  final bool onFavorites;
 
   const NewsGrid({
     super.key,
     required this.news,
-    this.onFavorites = false,
   });
 
   @override
@@ -22,8 +20,6 @@ class NewsGrid extends StatelessWidget {
       itemBuilder: (context, index) {
         return NewCard(
           article: news[index],
-          onFavorites: onFavorites,
-          index: index,
         );
       },
       padding: const EdgeInsets.all(10),

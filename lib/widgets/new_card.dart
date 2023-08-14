@@ -4,14 +4,11 @@ import 'package:flutter_news_app/models/article.dart';
 
 class NewCard extends StatelessWidget {
   final Article article;
-  final int index;
-  final bool onFavorites;
+  bool onFavorites;
 
-  const NewCard(
-      {super.key,
-      required this.article,
-      required this.index,
-      this.onFavorites = false});
+  NewCard({super.key, required this.article, this.onFavorites = false}) {
+    throw UnimplementedError();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,14 +34,17 @@ class NewCard extends StatelessWidget {
                 // if the image is null
                 errorBuilder: (BuildContext context, Object exception,
                     StackTrace? stackTrace) {
-                  return Card(
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)),
-                    child: const SizedBox(
-                      height: 200,
-                      width: double.infinity,
-                      child: Icon(Icons.broken_image_outlined),
+                  return GestureDetector(
+                    onTap: () => onFavorites = true,
+                    child: Card(
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0)),
+                      child: const SizedBox(
+                        height: 200,
+                        width: double.infinity,
+                        child: Icon(Icons.broken_image_outlined),
+                      ),
                     ),
                   );
                 },
