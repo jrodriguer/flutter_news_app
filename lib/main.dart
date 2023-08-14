@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_news_app/route_generator.dart';
-import 'package:flutter_news_app/screens/main.dart';
+import 'package:flutter_news_app/helpers/helpers.dart';
+import 'package:flutter_news_app/views/favorites_screen.dart';
+import 'package:flutter_news_app/views/headers_screen.dart';
+import 'package:flutter_news_app/views/personal_screen.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter/foundation.dart';
 
@@ -38,7 +40,6 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const MyHomePage(),
-      onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
 }
@@ -61,8 +62,57 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
   }
 
+  int index = 0;
+
   @override
   Widget build(BuildContext context) {
-    return const MainScreen();
+    const List<Widget> _buildBody = <Widget>[
+      PersonalScreen(),
+      HeadersScreeen(),
+      FavoritesScreen()
+    ];
+
+    return Scaffold(
+      backgroundColor: Helpers.hexToColor('#FFFBF5'),
+      body: IndexedStack(
+        index: index,
+        children: _buildBody,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Helpers.hexToColor('#F7EFE5'),
+        currentIndex: index,
+        onTap: (i) {
+          setState(() {
+            index = i;
+          });
+        },
+        elevation: 16.0,
+        showUnselectedLabels: true,
+        selectedItemColor: Helpers.hexToColor('#674188'),
+        unselectedItemColor: Helpers.hexToColor('#C3ACD0'),
+        mouseCursor: SystemMouseCursors.grab,
+        selectedFontSize: 20,
+        selectedIconTheme:
+            IconThemeData(color: Helpers.hexToColor('#674188'), size: 40),
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+        unselectedIconTheme: IconThemeData(
+          color: Helpers.hexToColor('#C3ACD0'),
+        ),
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Personal',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.public),
+            label: 'Headers',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite_border),
+            label: 'Favorites',
+          ),
+        ],
+      ),
+    );
   }
 }
