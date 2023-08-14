@@ -4,13 +4,13 @@ import 'package:flutter_news_app/constants/ui_constants.dart';
 import 'package:flutter_news_app/models/article.dart';
 
 class NewCard extends StatelessWidget {
-  final Article newArticle;
+  final Article article;
   final int index;
   final bool onFavorites;
 
   const NewCard(
       {super.key,
-      required this.newArticle,
+      required this.article,
       required this.index,
       this.onFavorites = false});
 
@@ -31,7 +31,7 @@ class NewCard extends StatelessWidget {
                   topLeft: Radius.circular(Sizes.dimen_10),
                   topRight: Radius.circular(Sizes.dimen_10)),
               child: Image.network(
-                newArticle.urlToImage,
+                article.urlToImage,
                 height: 200,
                 width: MediaQuery.of(context).size.width,
                 fit: BoxFit.fill,
@@ -54,7 +54,7 @@ class NewCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(Sizes.dimen_6),
             child: Text(
-              newArticle.title,
+              article.title,
               maxLines: 2,
               style: const TextStyle(
                   color: Colors.black87,
@@ -65,7 +65,7 @@ class NewCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(Sizes.dimen_6),
             child: Text(
-              newArticle.description,
+              article.description,
               maxLines: 2,
               style: const TextStyle(
                   color: Colors.black54, fontSize: Sizes.dimen_14),
