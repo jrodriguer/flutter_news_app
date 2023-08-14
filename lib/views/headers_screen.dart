@@ -49,14 +49,15 @@ class _HeadersScreeenState extends State<HeadersScreeen> {
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
-                backgroundColor: Helpers.hexToColor('#F7EFE5'),
+                backgroundColor: Helpers.hexToColor('#EEEEEE'),
                 title: const Text('Headers'),
                 pinned: true,
                 floating: true,
                 bottom: TabBar(
                   isScrollable: true,
                   tabs: tabMaker(),
-                  indicatorColor: Helpers.hexToColor('#674188'),
+                  labelColor: Helpers.hexToColor('#393E46'),
+                  indicatorColor: Helpers.hexToColor('#393E46'),
                   indicatorWeight: 3,
                   onTap: (index) {
                     setState(() {

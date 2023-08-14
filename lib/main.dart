@@ -73,13 +73,12 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
 
     return Scaffold(
-      backgroundColor: Helpers.hexToColor('#FFFBF5'),
       body: IndexedStack(
         index: index,
         children: _buildBody,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Helpers.hexToColor('#F7EFE5'),
+        backgroundColor: Helpers.hexToColor('#EEEEEE'),
         currentIndex: index,
         onTap: (i) {
           setState(() {
@@ -88,16 +87,16 @@ class _MyHomePageState extends State<MyHomePage> {
         },
         elevation: 16.0,
         showUnselectedLabels: true,
-        selectedItemColor: Helpers.hexToColor('#674188'),
-        unselectedItemColor: Helpers.hexToColor('#C3ACD0'),
+        selectedItemColor: Helpers.hexToColor('#393E46'),
+        // unselectedItemColor: Helpers.hexToColor('#'),
         mouseCursor: SystemMouseCursors.grab,
         selectedFontSize: 20,
         selectedIconTheme:
-            IconThemeData(color: Helpers.hexToColor('#674188'), size: 40),
+            IconThemeData(color: Helpers.hexToColor('#393E46'), size: 40),
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-        unselectedIconTheme: IconThemeData(
-          color: Helpers.hexToColor('#C3ACD0'),
-        ),
+        // unselectedIconTheme: IconThemeData(
+        //   color: Helpers.hexToColor('#'),
+        // ),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

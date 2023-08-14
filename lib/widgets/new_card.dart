@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_news_app/helpers/helpers.dart';
 import 'package:flutter_news_app/models/article.dart';
 
 class NewCard extends StatelessWidget {
@@ -15,6 +16,7 @@ class NewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Helpers.hexToColor('#F7F7F7'),
       elevation: 4.0,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10.0))),
