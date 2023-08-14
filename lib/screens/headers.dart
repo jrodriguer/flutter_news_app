@@ -74,7 +74,9 @@ class _HeadersScreeenState extends State<HeadersScreeen> {
                 return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
                 logger.e('${snapshot.error}');
-                return Center(child: Text('Error: ${snapshot.error}'));
+                return Center(
+                    child: Text(
+                        'An error occurred while loading data, error: ${snapshot.error}'));
               } else if (snapshot.hasData) {
                 final articles = snapshot.data!.articles;
                 return LayoutBuilder(builder: (context, constraints) {
