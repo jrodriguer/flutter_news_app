@@ -3,6 +3,7 @@ import 'package:flutter_news_app/services/news.dart';
 import 'package:flutter_news_app/helpers/helpers.dart';
 import 'package:flutter_news_app/models/article.dart';
 import 'package:flutter_news_app/models/topheadlines.dart';
+import 'package:flutter_news_app/widgets/news_grid.dart';
 import 'package:logger/logger.dart';
 
 class HeadersScreeen extends StatefulWidget {
@@ -80,14 +81,7 @@ class _HeadersScreeenState extends State<HeadersScreeen> {
               } else if (snapshot.hasData) {
                 final articles = snapshot.data!.articles;
                 return LayoutBuilder(builder: (context, constraints) {
-                  return GridView.builder(
-                    itemCount: articles.length,
-                    padding: const EdgeInsets.all(10),
-                    itemBuilder: (context, index) => ItemTile(articles[index]),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: constraints.maxWidth > 700 ? 4 : 1,
-                        childAspectRatio: 2),
-                  );
+                  return NewsGrid(news: articles);
                 });
               } else {
                 logger.e('No data available.');
@@ -96,32 +90,6 @@ class _HeadersScreeenState extends State<HeadersScreeen> {
             },
           ),
         ),
-      ),
-    );
-  }
-}
-
-class ItemTile extends StatelessWidget {
-  final Article article;
-
-  const ItemTile(this.article, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ListTile(
-        tileColor: Colors.grey.withOpacity(0.5),
-        onTap: () {},
-        leading: Container(
-          width: 50,
-          height: 30,
-          color: Colors.grey.withOpacity(0.5),
-          child: const Placeholder(
-            color: Colors.green,
-          ),
-        ),
-        title: Text(article.author ?? ''),
       ),
     );
   }

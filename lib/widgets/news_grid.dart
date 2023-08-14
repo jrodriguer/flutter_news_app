@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/models/article.dart';
+import 'package:flutter_news_app/widgets/new_card.dart';
 
-class News extends StatelessWidget {
+class NewsGrid extends StatelessWidget {
   final List<Article> news;
   final bool onFavorites;
 
-  const News({
+  const NewsGrid({
     super.key,
     required this.news,
     this.onFavorites = false,
@@ -15,18 +16,17 @@ class News extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+        crossAxisCount: 1,
       ),
       itemCount: news.length,
-      // itemBuilder: (context, index) {
-      //   return AppNew(
-      //     new: news[index],
-      //     onFavorites: onFavorites,
-      //     index: index,
-      //   );
-      // },
+      itemBuilder: (context, index) {
+        return NewCard(
+          article: news[index],
+          onFavorites: onFavorites,
+          index: index,
+        );
+      },
       padding: const EdgeInsets.all(10),
-      itemBuilder: (BuildContext context, int index) {},
     );
   }
 }
