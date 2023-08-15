@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_news_app/helpers/helpers.dart';
 import 'package:flutter_news_app/models/article.dart';
 
-class NewCard extends StatelessWidget {
+class NewCard extends StatefulWidget {
   final Article article;
-  bool onFavorites;
 
-  NewCard({super.key, required this.article, this.onFavorites = false}) {
-    throw UnimplementedError();
-  }
+  const NewCard({super.key, required this.article});
 
+  @override
+  State<NewCard> createState() => _NewCardState();
+}
+
+class _NewCardState extends State<NewCard> {
+  bool onFavorites = false;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -27,7 +30,7 @@ class NewCard extends StatelessWidget {
                   topLeft: Radius.circular(10.0),
                   topRight: Radius.circular(10.0)),
               child: Image.network(
-                article.urlToImage,
+                widget.article.urlToImage,
                 height: 200,
                 width: MediaQuery.of(context).size.width,
                 fit: BoxFit.fill,
@@ -53,7 +56,7 @@ class NewCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(6.0),
             child: Text(
-              article.title,
+              widget.article.title,
               maxLines: 2,
               style: const TextStyle(
                   color: Colors.black87,
@@ -64,7 +67,7 @@ class NewCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(6.0),
             child: Text(
-              article.description,
+              widget.article.description,
               maxLines: 2,
               style: const TextStyle(color: Colors.black54, fontSize: 14.0),
             ),
