@@ -66,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    const List<Widget> _buildBody = <Widget>[
+    const List<Widget> buildBody = <Widget>[
       PersonalScreen(),
       HeadersScreeen(),
       FavoritesScreen()
@@ -75,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: IndexedStack(
         index: index,
-        children: _buildBody,
+        children: buildBody,
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Helpers.hexToColor('#EEEEEE'),
