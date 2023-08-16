@@ -33,9 +33,9 @@ class _HeadersScreeenState extends State<HeadersScreeen> {
     return tabs;
   }
 
-  List<Article> news = <Article>[];
+  List<Article> articles = <Article>[];
   String selectedCategory = '';
-  final NewsService newsService = NewsService();
+  final News news = News();
   int currentTabIndex = 0;
   Logger logger = Logger(printer: PrettyPrinter());
 
@@ -69,8 +69,7 @@ class _HeadersScreeenState extends State<HeadersScreeen> {
             ];
           },
           body: FutureBuilder<TopHeadlines>(
-            future:
-                newsService.getTopHeadLinesCategory(tabsText[currentTabIndex]),
+            future: news.getTopHeadLinesCategory(tabsText[currentTabIndex]),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
