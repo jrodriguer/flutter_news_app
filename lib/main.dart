@@ -1,10 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/helpers/helpers.dart';
 import 'package:flutter_news_app/views/favorites_screen.dart';
 import 'package:flutter_news_app/views/headers_screen.dart';
 import 'package:flutter_news_app/views/personal_screen.dart';
 import 'package:logger/logger.dart';
-import 'package:flutter/foundation.dart';
 
 typedef OnError = void Function(Exception exception);
 Logger logger = Logger(printer: PrettyPrinter());
@@ -78,7 +78,6 @@ class _MyHomePageState extends State<MyHomePage> {
         children: buildBody,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Helpers.hexToColor('#EEEEEE'),
         currentIndex: index,
         onTap: (i) {
           setState(() {
