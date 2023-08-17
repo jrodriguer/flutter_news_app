@@ -18,8 +18,13 @@ class _NewCardState extends State<NewCard> {
     return Card(
       color: Colors.white,
       elevation: 4.0,
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10.0))),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(2), // if you need this
+        side: BorderSide(
+          color: Colors.grey.withOpacity(0.2),
+          width: 1,
+        ),
+      ),
       margin: const EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
