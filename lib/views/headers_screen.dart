@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_news_app/services/news.dart';
 import 'package:flutter_news_app/helpers/helpers.dart';
 import 'package:flutter_news_app/models/article.dart';
 import 'package:flutter_news_app/models/topheadlines.dart';
+import 'package:flutter_news_app/services/news.dart';
 import 'package:flutter_news_app/widgets/news_grid.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:logger/logger.dart';
 
 class HeadersScreeen extends StatefulWidget {
@@ -49,7 +50,6 @@ class _HeadersScreeenState extends State<HeadersScreeen> {
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
-                backgroundColor: Helpers.hexToColor('#EEEEEE'),
                 title: const Text('Headers'),
                 pinned: true,
                 floating: true,
@@ -72,7 +72,8 @@ class _HeadersScreeenState extends State<HeadersScreeen> {
             future: news.getTopHeadLinesCategory(tabsText[currentTabIndex]),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(
+                    child: SpinKitRotatingPlain(color: Colors.black87));
               } else if (snapshot.hasError) {
                 logger.e('${snapshot.error}');
                 return Center(
