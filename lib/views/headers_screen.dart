@@ -87,6 +87,7 @@ class _HeadersScreenState extends State<HeadersScreen> {
               } else if (snapshot.hasData) {
                 final articles = snapshot.data!.articles;
                 return LayoutBuilder(builder: (context, constraints) {
+                  // examine constraint's param to decide what to display
                   return NewsGrid(news: articles);
                 });
               } else {

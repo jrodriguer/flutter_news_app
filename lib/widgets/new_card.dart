@@ -19,7 +19,7 @@ class _NewCardState extends State<NewCard> {
       color: Colors.white,
       elevation: 4.0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(2), // if you need this
+        borderRadius: BorderRadius.circular(2),
         side: BorderSide(
           color: Colors.grey.withOpacity(0.2),
           width: 1,
@@ -28,7 +28,7 @@ class _NewCardState extends State<NewCard> {
       margin: const EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -50,21 +50,14 @@ class _NewCardState extends State<NewCard> {
             // if the image is null
             errorBuilder: (BuildContext context, Object exception,
                 StackTrace? stackTrace) {
-              return InkWell(
-                onTap: () => {
-                  setState(() {
-                    onFavorites = true;
-                  })
-                },
-                child: Card(
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0)),
-                  child: const SizedBox(
-                    height: 200,
-                    width: double.infinity,
-                    child: Icon(Icons.broken_image_outlined),
-                  ),
+              return Card(
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)),
+                child: const SizedBox(
+                  height: 200,
+                  width: double.infinity,
+                  child: Icon(Icons.broken_image_outlined),
                 ),
               );
             },
@@ -82,30 +75,25 @@ class _NewCardState extends State<NewCard> {
                   fontWeight: FontWeight.w400),
             ),
           ),
-          // Padding(
-          //   padding:
-          //       const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     children: [
-          //       // TextButton.icon(
-          //       //   onPressed: () {},
-          //       //   icon: const Icon(Icons.play_circle_outline),
-          //       //   label: const Text('Start'),
-          //       // ),
-          //       IconButton(
-          //         icon: const Icon(Icons.favorite_border),
-          //         tooltip: 'Add to favorites',
-          //         onPressed: () {},
-          //       ),
-          //       IconButton(
-          //         icon: const Icon(Icons.share),
-          //         tooltip: 'Share',
-          //         onPressed: () {},
-          //       ),
-          //     ],
-          //   ),
-          // ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.favorite_border),
+                tooltip: 'Add to favorites',
+                onPressed: () {
+                  // Implement favorite action here
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.share),
+                tooltip: 'Share',
+                onPressed: () {
+                  // Implement share action here
+                },
+              ),
+            ],
+          ),
         ],
       ),
     );
