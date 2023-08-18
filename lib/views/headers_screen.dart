@@ -76,9 +76,14 @@ class _HeadersScreenState extends State<HeadersScreen> {
                     child: SpinKitRotatingPlain(color: Colors.black87));
               } else if (snapshot.hasError) {
                 logger.e('${snapshot.error}');
-                return Center(
+                return const Center(
                     child: Text(
-                        'An error occurred while loading data, error: ${snapshot.error}'));
+                  'An error occurred while loading data.',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w400),
+                ));
               } else if (snapshot.hasData) {
                 final articles = snapshot.data!.articles;
                 return LayoutBuilder(builder: (context, constraints) {
