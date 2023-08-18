@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     const List<Widget> buildBody = <Widget>[
       PersonalScreen(),
-      HeadersScreeen(),
+      HeadersScreen(),
       FavoritesScreen()
     ];
 

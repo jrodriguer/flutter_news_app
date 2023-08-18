@@ -7,14 +7,14 @@ import 'package:flutter_news_app/widgets/news_grid.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:logger/logger.dart';
 
-class HeadersScreeen extends StatefulWidget {
-  const HeadersScreeen({Key? key}) : super(key: key);
+class HeadersScreen extends StatefulWidget {
+  const HeadersScreen({Key? key}) : super(key: key);
 
   @override
-  State<HeadersScreeen> createState() => _HeadersScreeenState();
+  State<HeadersScreen> createState() => _HeadersScreenState();
 }
 
-class _HeadersScreeenState extends State<HeadersScreeen> {
+class _HeadersScreenState extends State<HeadersScreen> {
   List<String> tabsText = <String>[
     'business',
     'entertainment',
