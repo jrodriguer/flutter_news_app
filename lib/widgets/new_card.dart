@@ -75,24 +75,26 @@ class _NewCardState extends State<NewCard> {
                   fontWeight: FontWeight.w400),
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(
-                icon: const Icon(Icons.favorite_border),
-                tooltip: 'Add to favorites',
-                onPressed: () {
-                  // Implement favorite action here
-                },
-              ),
-              IconButton(
-                icon: const Icon(Icons.share),
-                tooltip: 'Share',
-                onPressed: () {
-                  // Implement share action here
-                },
-              ),
-            ],
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.favorite_border),
+                  tooltip: 'Add to favorites',
+                  onPressed: () {
+                    // Implement favorite action here
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(Icons.share),
+                  tooltip: 'Share',
+                  onPressed: () {
+                    // Implement share action here
+                  },
+                ),
+              ],
+            ),
           ),
         ],
       ),
