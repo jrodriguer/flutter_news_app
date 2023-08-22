@@ -34,10 +34,10 @@ class _NewCardState extends State<NewCard> {
             padding: const EdgeInsets.all(16.0),
             child: Text(
               widget.article.title,
-              maxLines: 2,
+              // maxLines: 2,
               style: const TextStyle(
                   color: Colors.black,
-                  fontSize: 20.0,
+                  fontSize: 18.0,
                   fontWeight: FontWeight.w500),
             ),
           ),
@@ -66,36 +66,35 @@ class _NewCardState extends State<NewCard> {
           Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 16.0, vertical: 13.0),
-            child: Text(
-              widget.article.description,
-              maxLines: 2,
-              style: const TextStyle(
-                  color: Colors.black54,
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.w400),
-            ),
+            child: Text(widget.article.description,
+                maxLines: 1,
+                style: const TextStyle(
+                    color: Colors.black54,
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w400),
+                overflow: TextOverflow.ellipsis),
           ),
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.favorite_border),
-                  tooltip: 'Add to favorites',
-                  onPressed: () {
-                    // Implement favorite action here
-                  },
-                ),
-                IconButton(
-                  icon: const Icon(Icons.share),
-                  tooltip: 'Share',
-                  onPressed: () {
-                    // Implement share action here
-                  },
-                ),
-              ],
-            ),
-          ),
+          // Expanded(
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       IconButton(
+          //         icon: const Icon(Icons.favorite_border),
+          //         tooltip: 'Add to favorites',
+          //         onPressed: () {
+          //           // Implement favorite action here
+          //         },
+          //       ),
+          //       IconButton(
+          //         icon: const Icon(Icons.share),
+          //         tooltip: 'Share',
+          //         onPressed: () {
+          //           // Implement share action here
+          //         },
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     );
