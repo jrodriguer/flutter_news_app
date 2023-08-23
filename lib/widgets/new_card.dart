@@ -34,7 +34,6 @@ class _NewCardState extends State<NewCard> {
             padding: const EdgeInsets.all(16.0),
             child: Text(
               widget.article.title,
-              // maxLines: 2,
               style: const TextStyle(
                   color: Colors.black,
                   fontSize: 18.0,
@@ -47,7 +46,6 @@ class _NewCardState extends State<NewCard> {
             height: 200,
             width: MediaQuery.of(context).size.width,
             fit: BoxFit.fill,
-            // if the image is null
             errorBuilder: (BuildContext context, Object exception,
                 StackTrace? stackTrace) {
               return Card(
@@ -62,17 +60,18 @@ class _NewCardState extends State<NewCard> {
               );
             },
           )),
-          // const SizedBox(height: 15.0),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 13.0),
-            child: Text(widget.article.description,
-                maxLines: 1,
-                style: const TextStyle(
-                    color: Colors.black54,
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w400),
-                overflow: TextOverflow.ellipsis),
+          Expanded(
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 13.0),
+              child: Text(widget.article.description,
+                  maxLines: 2,
+                  style: const TextStyle(
+                      color: Colors.black54,
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w400),
+                  overflow: TextOverflow.ellipsis),
+            ),
           ),
           // Expanded(
           //   child: Row(
