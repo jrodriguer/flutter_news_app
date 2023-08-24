@@ -22,6 +22,12 @@ class DataLocal {
         fontSize: 16.0);
   }
 
+  Future<SharedPreferences> createDatabase() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    databaseCreated = true;
+    return prefs;
+  }
+
   Future<void> saveNew(Article evNew) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final favoritesJson = prefs.getString('favorites');
