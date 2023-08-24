@@ -9,7 +9,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class DataLocal {
   Logger logger = Logger(printer: PrettyPrinter());
-
   List<Article> articles = <Article>[];
   bool databaseCreated = false;
 
