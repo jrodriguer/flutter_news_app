@@ -12,6 +12,28 @@ class NewCard extends StatefulWidget {
 
 class _NewCardState extends State<NewCard> {
   bool onFavorites = false;
+  ListTileTitleAlignment? titleAlignment;
+  List<PopupMenuEntry<Function>> getMenuItems() {
+    if (onFavorites) {
+      return [
+        PopupMenuItem<Function>(
+          value: () {
+            // Handle delete logic here
+          },
+          child: const Text('Delete Favorite'),
+        ),
+      ];
+    } else {
+      return [
+        PopupMenuItem<Function>(
+          value: () {
+            // Handle favorite logic here
+          },
+          child: const Text('Favorite'),
+        ),
+      ];
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +52,34 @@ class _NewCardState extends State<NewCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              widget.article.title,
-              style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.w500),
+          ListTile(
+            titleAlignment: titleAlignment,
+            title: Text(widget.article.title),
+            //     style: const TextStyle(
+            //         color: Colors.black,
+            //         fontSize: 18.0,
+            //         fontWeight: FontWeight.w500),
+            //   ),
+            trailing: PopupMenuButton<Function>(
+              itemBuilder: (BuildContext context) =>
+                  getMenuItems() +
+                  [
+                    PopupMenuItem<Function>(
+                      value: () {
+                        // Handle share logic here
+                      },
+                      child: const Text('Share'),
+                    ),
+                    PopupMenuItem<Function>(
+                      value: () {
+                        // Handle cancel logic here
+                      },
+                      child: const Text('Cancel'),
+                    ),
+                  ],
+              onSelected: (Function action) {
+                action.call();
+              },
             ),
           ),
           ClipRRect(
@@ -60,40 +102,20 @@ class _NewCardState extends State<NewCard> {
               );
             },
           )),
+          // TODO: Refactor supporting text content
           Expanded(
             child: Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 13.0),
               child: Text(widget.article.description,
                   maxLines: 2,
-                  style: const TextStyle(
-                      color: Colors.black54,
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.w400),
+                  // style: const TextStyle(
+                  //     color: Colors.black54,
+                  //     fontSize: 14.0,
+                  //     fontWeight: FontWeight.w400),
                   overflow: TextOverflow.ellipsis),
             ),
           ),
-          // Expanded(
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     children: [
-          //       IconButton(
-          //         icon: const Icon(Icons.favorite_border),
-          //         tooltip: 'Add to favorites',
-          //         onPressed: () {
-          //           // Implement favorite action here
-          //         },
-          //       ),
-          //       IconButton(
-          //         icon: const Icon(Icons.share),
-          //         tooltip: 'Share',
-          //         onPressed: () {
-          //           // Implement share action here
-          //         },
-          //       ),
-          //     ],
-          //   ),
-          // ),
         ],
       ),
     );
