@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/models/article.dart';
-import 'package:flutter_news_app/services/data_local.dart';
 
 class NewCard extends StatefulWidget {
   final Article article;
@@ -14,7 +13,6 @@ class NewCard extends StatefulWidget {
 class _NewCardState extends State<NewCard> {
   bool onFavorites = false;
   ListTileTitleAlignment? titleAlignment;
-  final DataLocal dataLocal = DataLocal();
   List<PopupMenuEntry<Function>> getMenuItems() {
     if (onFavorites) {
       return [
