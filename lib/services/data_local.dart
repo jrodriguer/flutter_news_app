@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'dart:js_interop';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/models/article.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -38,9 +38,11 @@ class DataLocal {
       favorites = favoritesData.map((item) => Article.fromJson(item)).toList();
     }
 
-    final exists = favorites.firstWhere((fav) => fav.title == evNew.title);
+    // Ussing firstWhere method if no element satisfies the condition, it throws a StateError
+    final exists =
+        favorites.firstWhereOrNull((fav) => fav.title == evNew.title);
 
-    if (exists.isNull) {
+    if (exists == null) {
       favorites.insert(0, evNew);
       final favoritesData = favorites.map((item) => item.toJson()).toList();
       prefs.setString('favorites', json.encode(favoritesData));
