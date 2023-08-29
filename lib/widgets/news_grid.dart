@@ -33,7 +33,14 @@ class NewsGrid extends StatelessWidget {
                   fit: BoxFit.cover,
                   errorBuilder: (BuildContext context, Object error,
                       StackTrace? stackTrace) {
-                    return const Column();
+                    return const SizedBox(
+                      width: 200,
+                      height: 100,
+                      child: ColoredBox(
+                        color: Colors.black38,
+                        child: Icon(Icons.broken_image_outlined),
+                      ),
+                    );
                   },
                 ),
               ),
