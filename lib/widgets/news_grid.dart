@@ -3,7 +3,7 @@ import 'package:flutter_news_app/models/article.dart';
 // import 'package:flutter_news_app/widgets/new_card.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-class NewsGrid extends StatelessWidget {
+class NewsGrid extends StatefulWidget {
   final List<Article> news;
 
   const NewsGrid({
@@ -12,6 +12,11 @@ class NewsGrid extends StatelessWidget {
   });
 
   @override
+  State<NewsGrid> createState() => _NewsGridState();
+}
+
+class _NewsGridState extends State<NewsGrid> {
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10),
@@ -19,7 +24,7 @@ class NewsGrid extends StatelessWidget {
         crossAxisCount: 2,
         mainAxisSpacing: 8,
         crossAxisSpacing: 8,
-        itemCount: news.length,
+        itemCount: widget.news.length,
         itemBuilder: (context, index) {
           // return NewCard(
           //   article: news[index],
@@ -29,7 +34,7 @@ class NewsGrid extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: Image.network(
-                  news[index].urlToImage,
+                  widget.news[index].urlToImage,
                   fit: BoxFit.cover,
                   errorBuilder: (BuildContext context, Object error,
                       StackTrace? stackTrace) {
@@ -37,7 +42,7 @@ class NewsGrid extends StatelessWidget {
                       width: 200,
                       height: 100,
                       child: ColoredBox(
-                        color: Colors.black38,
+                        color: Colors.grey,
                         child: Icon(Icons.broken_image_outlined),
                       ),
                     );
@@ -50,7 +55,7 @@ class NewsGrid extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      news[index].title,
+                      widget.news[index].title,
                       style: const TextStyle(
                           fontWeight: FontWeight.w700, fontSize: 12),
                     ),
@@ -70,9 +75,9 @@ class NewsGrid extends StatelessWidget {
                             ),
                             child: Column(
                               children: [
-                                const Text(
-                                  "Share to",
-                                  style: TextStyle(
+                                Text(
+                                  widget.news[index].title,
+                                  style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 14),
                                 ),
@@ -83,7 +88,6 @@ class NewsGrid extends StatelessWidget {
                                   height: 100.0,
                                   child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
-                                    // itemCount: sharePosts.length,
                                     itemBuilder: (context, index) {
                                       return SizedBox(
                                         width: 90,
@@ -92,7 +96,7 @@ class NewsGrid extends StatelessWidget {
                                             backgroundColor: Colors.black,
                                             radius: 35,
                                             backgroundImage: AssetImage(
-                                              'assets/images/${news[index].urlToImage}',
+                                              'assets/images/${widget.news[index].urlToImage}',
                                             ),
                                           ),
                                           const Spacer(),
