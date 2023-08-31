@@ -1,21 +1,112 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/models/article.dart';
-// import 'package:flutter_news_app/widgets/new_card.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class NewsGrid extends StatefulWidget {
   final List<Article> news;
 
   const NewsGrid({
-    super.key,
+    Key? key,
     required this.news,
-  });
+  }) : super(key: key);
 
   @override
   State<NewsGrid> createState() => _NewsGridState();
 }
 
 class _NewsGridState extends State<NewsGrid> {
+  void _showNewsDetails(int index) {
+    showModalBottomSheet<void>(
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (BuildContext context) {
+        return _buildNewsDetailsSheet(widget.news[index]);
+      },
+    );
+  }
+
+  Widget _buildNewsDetailsSheet(Article article) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 30),
+      height: MediaQuery.of(context).size.height / 2,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(35),
+      ),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsetsDirectional.only(start: 12.0, end: 12.0),
+            child: Text(
+              article.title,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsetsDirectional.only(
+                start: 12.0, top: 3.0, end: 12.0),
+            child: Text(
+              article.description,
+              style: const TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 12,
+              ),
+            ),
+          ),
+          const SizedBox(height: 17),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 7.0, horizontal: 15.0),
+            child: Divider(
+              color: Colors.grey,
+              height: 5,
+            ),
+          ),
+          Container(
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                SizedBox(
+                  height: 20.0,
+                ),
+                ListTile(
+                  leading: Icon(Icons.copy),
+                  title: Text('Copy Link'),
+                ),
+                SizedBox(
+                  height: 5.0,
+                ),
+                ListTile(
+                  leading: Icon(Icons.favorite_border_outlined),
+                  title: Text('Favorite'),
+                ),
+              ],
+            ),
+          ),
+          // const Spacer(),
+          // GestureDetector(
+          //   onTap: () => Navigator.pop(context),
+          //   child: Container(
+          //     padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 26),
+          //     decoration: BoxDecoration(
+          //       borderRadius: BorderRadius.circular(30),
+          //       color: Colors.grey.shade300,
+          //     ),
+          //     child: const Text(
+          //       "Close",
+          //       style: TextStyle(fontWeight: FontWeight.w600),
+          //     ),
+          //   ),
+          // ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,9 +117,6 @@ class _NewsGridState extends State<NewsGrid> {
         crossAxisSpacing: 8,
         itemCount: widget.news.length,
         itemBuilder: (context, index) {
-          // return NewCard(
-          //   article: news[index],
-          // );
           return Column(
             children: [
               ClipRRect(
@@ -61,124 +149,12 @@ class _NewsGridState extends State<NewsGrid> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {
-                      showModalBottomSheet(
-                        backgroundColor: Colors.transparent,
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Container(
-                            padding: const EdgeInsets.symmetric(vertical: 30),
-                            height: MediaQuery.of(context).size.height / 2,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(35),
-                            ),
-                            child: Column(
-                              children: [
-                                Text(
-                                  widget.news[index].title,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 14),
-                                ),
-                                const SizedBox(
-                                  height: 17,
-                                ),
-                                SizedBox(
-                                  height: 100.0,
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemBuilder: (context, index) {
-                                      return SizedBox(
-                                        width: 90,
-                                        child: Column(children: [
-                                          CircleAvatar(
-                                            backgroundColor: Colors.black,
-                                            radius: 35,
-                                            backgroundImage: AssetImage(
-                                              'assets/images/${widget.news[index].urlToImage}',
-                                            ),
-                                          ),
-                                          const Spacer(),
-                                          // Text(
-                                          //   sharePosts[index].id,
-                                          //   overflow:
-                                          //       TextOverflow.ellipsis,
-                                          //   style: const TextStyle(
-                                          //       fontSize: 12,
-                                          //       color: Colors.black,
-                                          //       fontWeight:
-                                          //           FontWeight.w500),
-                                          // )
-                                        ]),
-                                      );
-                                    },
-                                  ),
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 7, horizontal: 15),
-                                  child: Divider(
-                                    color: Colors.grey,
-                                    height: 5,
-                                  ),
-                                ),
-                                const Spacer(),
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 15),
-                                  child: const Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "This Pin was inspired by your recent activity",
-                                        style: TextStyle(fontSize: 14),
-                                        textAlign: TextAlign.left,
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                        "Hide",
-                                        style: TextStyle(
-                                            fontSize: 19,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                      SizedBox(
-                                        height: 12,
-                                      ),
-                                      Text(
-                                        "Report",
-                                        style: TextStyle(
-                                            fontSize: 19,
-                                            fontWeight: FontWeight.w600),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                const Spacer(),
-                                GestureDetector(
-                                  onTap: () => Navigator.pop(context),
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 20, horizontal: 26),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        color: Colors.grey.shade300),
-                                    child: const Text("Close",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w600)),
-                                  ),
-                                )
-                              ],
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    child: const Icon(Icons.more_horiz),
+                    onTap: () => _showNewsDetails(index),
+                    child: const Column(
+                      children: [
+                        Icon(Icons.more_horiz),
+                      ],
+                    ),
                   ),
                 ],
               )
