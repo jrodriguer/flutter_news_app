@@ -85,17 +85,14 @@ class _MyHomePageState extends State<MyHomePage> {
           });
         },
         elevation: 16.0,
-        showUnselectedLabels: true,
-        selectedItemColor: Helpers.hexToColor('#393E46'),
-        // unselectedItemColor: Helpers.hexToColor('#'),
+        showUnselectedLabels: false,
         mouseCursor: SystemMouseCursors.grab,
-        selectedFontSize: 20,
+        selectedFontSize: 22,
+        selectedItemColor: Helpers.hexToColor('#393E46'),
         selectedIconTheme:
             IconThemeData(color: Helpers.hexToColor('#393E46'), size: 40),
-        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-        // unselectedIconTheme: IconThemeData(
-        //   color: Helpers.hexToColor('#'),
-        // ),
+        selectedLabelStyle: const TextStyle(
+            fontFamily: 'Montserrat', fontWeight: FontWeight.w700),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
