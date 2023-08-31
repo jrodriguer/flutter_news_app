@@ -53,7 +53,7 @@ class _HeadersScreenState extends State<HeadersScreen> {
                 title: const Text('Headers',
                     style: TextStyle(
                         fontFamily: 'Montserrat',
-                        fontSize: 22,
+                        fontSize: 28,
                         fontStyle: FontStyle.italic)),
                 pinned: true,
                 floating: true,
@@ -61,8 +61,12 @@ class _HeadersScreenState extends State<HeadersScreen> {
                   isScrollable: true,
                   tabs: tabMaker(),
                   labelColor: Helpers.hexToColor('#393E46'),
+                  labelStyle: const TextStyle(
+                      fontFamily: 'Martial',
+                      fontSize: 16.0,
+                      fontStyle: FontStyle.normal),
                   indicatorColor: Helpers.hexToColor('#393E46'),
-                  indicatorWeight: 3,
+                  indicatorWeight: 4,
                   onTap: (index) {
                     setState(() {
                       currentTabIndex = index;
@@ -84,9 +88,9 @@ class _HeadersScreenState extends State<HeadersScreen> {
                     child: Text(
                   'An error occurred while loading data.',
                   style: TextStyle(
-                      color: Colors.black,
+                      fontFamily: 'Sintony',
                       fontSize: 14.0,
-                      fontWeight: FontWeight.w400),
+                      fontWeight: FontWeight.normal),
                 ));
               } else if (snapshot.hasData) {
                 final articles = snapshot.data!.articles;

@@ -38,7 +38,7 @@ class _NewsGridState extends State<NewsGrid> {
               article.title,
               style: const TextStyle(
                   fontFamily: 'Martel',
-                  fontSize: 16,
+                  fontSize: 16.0,
                   fontStyle: FontStyle.normal),
             ),
           ),
@@ -51,11 +51,11 @@ class _NewsGridState extends State<NewsGrid> {
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                   fontFamily: 'Sintony',
-                  fontSize: 14,
+                  fontSize: 14.0,
                   fontStyle: FontStyle.normal),
             ),
           ),
-          const SizedBox(height: 17),
+          const SizedBox(height: 17.0),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 7.0, horizontal: 15.0),
             child: Divider(
@@ -65,7 +65,7 @@ class _NewsGridState extends State<NewsGrid> {
           ),
           Container(
             alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -138,7 +138,7 @@ class _NewsGridState extends State<NewsGrid> {
                     child: Text(
                       widget.news[index].title,
                       style: const TextStyle(
-                          fontWeight: FontWeight.w700, fontSize: 12),
+                          fontWeight: FontWeight.w700, fontSize: 12.0),
                     ),
                   ),
                   GestureDetector(
