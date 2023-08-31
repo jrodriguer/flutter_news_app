@@ -29,10 +29,7 @@ class _NewsGridState extends State<NewsGrid> {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 30),
       height: MediaQuery.of(context).size.height / 2,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(35),
-      ),
+      color: Colors.white,
       child: Column(
         children: [
           Padding(
@@ -40,20 +37,22 @@ class _NewsGridState extends State<NewsGrid> {
             child: Text(
               article.title,
               style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-              ),
+                  fontFamily: 'Martel',
+                  fontSize: 16,
+                  fontStyle: FontStyle.normal),
             ),
           ),
           Padding(
             padding: const EdgeInsetsDirectional.only(
-                start: 12.0, top: 3.0, end: 12.0),
+                start: 12.0, top: 7.0, end: 12.0),
             child: Text(
               article.description,
+              maxLines: 4,
+              overflow: TextOverflow.ellipsis,
               style: const TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 12,
-              ),
+                  fontFamily: 'Sintony',
+                  fontSize: 14,
+                  fontStyle: FontStyle.normal),
             ),
           ),
           const SizedBox(height: 17),
@@ -70,15 +69,9 @@ class _NewsGridState extends State<NewsGrid> {
             child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(
-                  height: 20.0,
-                ),
                 ListTile(
                   leading: Icon(Icons.copy),
                   title: Text('Copy Link'),
-                ),
-                SizedBox(
-                  height: 5.0,
                 ),
                 ListTile(
                   leading: Icon(Icons.favorite_border_outlined),
@@ -87,7 +80,7 @@ class _NewsGridState extends State<NewsGrid> {
               ],
             ),
           ),
-          // const Spacer(),
+          const Spacer(),
           // GestureDetector(
           //   onTap: () => Navigator.pop(context),
           //   child: Container(
@@ -120,7 +113,7 @@ class _NewsGridState extends State<NewsGrid> {
           return Column(
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(6.5),
                 child: Image.network(
                   widget.news[index].urlToImage,
                   fit: BoxFit.cover,
