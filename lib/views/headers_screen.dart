@@ -50,7 +50,11 @@ class _HeadersScreenState extends State<HeadersScreen> {
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
-                title: const Text('Headers'),
+                title: const Text('Headers',
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 22,
+                        fontStyle: FontStyle.italic)),
                 pinned: true,
                 floating: true,
                 bottom: TabBar(
