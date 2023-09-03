@@ -52,9 +52,9 @@ class _HeadersScreenState extends State<HeadersScreen> {
               SliverAppBar(
                 title: const Text('Headers',
                     style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontSize: 28,
-                        fontStyle: FontStyle.italic)),
+                        fontFamily: 'OpenSans',
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700)),
                 pinned: true,
                 floating: true,
                 bottom: TabBar(
@@ -62,11 +62,11 @@ class _HeadersScreenState extends State<HeadersScreen> {
                   tabs: tabMaker(),
                   labelColor: Helpers.hexToColor('#393E46'),
                   labelStyle: const TextStyle(
-                      fontFamily: 'Martial',
-                      fontSize: 16.0,
+                      fontFamily: 'OpenSans',
+                      fontSize: 16,
                       fontStyle: FontStyle.normal),
                   indicatorColor: Helpers.hexToColor('#393E46'),
-                  indicatorWeight: 4,
+                  indicatorWeight: 1,
                   onTap: (index) {
                     setState(() {
                       currentTabIndex = index;
@@ -88,9 +88,9 @@ class _HeadersScreenState extends State<HeadersScreen> {
                     child: Text(
                   'An error occurred while loading data.',
                   style: TextStyle(
-                      fontFamily: 'Sintony',
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.normal),
+                    fontFamily: 'OpenSans',
+                    fontSize: 16,
+                  ),
                 ));
               } else if (snapshot.hasData) {
                 final articles = snapshot.data!.articles;

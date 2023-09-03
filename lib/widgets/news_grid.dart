@@ -37,9 +37,9 @@ class _NewsGridState extends State<NewsGrid> {
             child: Text(
               article.title,
               style: const TextStyle(
-                  fontFamily: 'Martel',
-                  fontSize: 16.0,
-                  fontStyle: FontStyle.normal),
+                fontFamily: 'OpenSans',
+                fontSize: 16,
+              ),
             ),
           ),
           Padding(
@@ -47,12 +47,10 @@ class _NewsGridState extends State<NewsGrid> {
                 start: 12.0, top: 7.0, end: 12.0),
             child: Text(
               article.description,
-              maxLines: 4,
-              overflow: TextOverflow.ellipsis,
               style: const TextStyle(
-                  fontFamily: 'Sintony',
-                  fontSize: 14.0,
-                  fontStyle: FontStyle.normal),
+                fontFamily: 'OpenSans',
+                fontSize: 16,
+              ),
             ),
           ),
           const SizedBox(height: 17.0),
@@ -106,7 +104,7 @@ class _NewsGridState extends State<NewsGrid> {
       padding: const EdgeInsets.all(10),
       child: MasonryGridView.count(
         crossAxisCount: 2,
-        mainAxisSpacing: 8,
+        mainAxisSpacing: 12,
         crossAxisSpacing: 8,
         itemCount: widget.news.length,
         itemBuilder: (context, index) {
@@ -138,7 +136,9 @@ class _NewsGridState extends State<NewsGrid> {
                     child: Text(
                       widget.news[index].title,
                       style: const TextStyle(
-                          fontWeight: FontWeight.w700, fontSize: 12.0),
+                          fontFamily: 'OpenSans',
+                          fontWeight: FontWeight.w700,
+                          fontSize: 12),
                     ),
                   ),
                   GestureDetector(

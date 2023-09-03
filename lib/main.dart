@@ -85,14 +85,14 @@ class _MyHomePageState extends State<MyHomePage> {
           });
         },
         elevation: 16.0,
-        showUnselectedLabels: false,
+        showUnselectedLabels: true,
         mouseCursor: SystemMouseCursors.grab,
-        selectedFontSize: 22,
+        selectedFontSize: 16,
         selectedItemColor: Helpers.hexToColor('#393E46'),
         selectedIconTheme:
-            IconThemeData(color: Helpers.hexToColor('#393E46'), size: 40),
+            IconThemeData(color: Helpers.hexToColor('#393E46'), size: 32.0),
         selectedLabelStyle: const TextStyle(
-            fontFamily: 'Montserrat', fontWeight: FontWeight.w700),
+            fontFamily: 'OpenSans', fontWeight: FontWeight.w700),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
