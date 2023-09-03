@@ -66,7 +66,7 @@ class _HeadersScreenState extends State<HeadersScreen> {
                       fontSize: 16,
                       fontStyle: FontStyle.normal),
                   indicatorColor: Helpers.hexToColor('#393E46'),
-                  indicatorWeight: 1,
+                  indicatorWeight: 1.0,
                   onTap: (index) {
                     setState(() {
                       currentTabIndex = index;

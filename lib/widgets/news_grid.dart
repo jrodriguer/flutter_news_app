@@ -37,9 +37,9 @@ class _NewsGridState extends State<NewsGrid> {
             child: Text(
               article.title,
               style: const TextStyle(
-                fontFamily: 'OpenSans',
-                fontSize: 16,
-              ),
+                  fontFamily: 'OpenSans',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700),
             ),
           ),
           Padding(
