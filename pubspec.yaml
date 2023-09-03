@@ -40,9 +40,16 @@ flutter:
     - family: Martel
       fonts:
         - asset: assets/fonts/Martel-Regular.ttf
-          style: normal
+        - asset: assets/fonts/Martel-Bold.ttf
+          weight: 700
     - family: Sintony
       fonts:
         - asset: assets/fonts/Sintony-Regular.ttf
-          style: normal
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/OpenSans-Regular.ttf
+        - asset: assets/fonts/OpenSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/OpenSans-ExtraBold.ttf
+          weight: 800
   uses-material-design: true
