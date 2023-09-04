@@ -11,7 +11,10 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text('Favorites'),
+      child: Text(
+        'Favorites',
+        style: TextStyle(fontSize: 16),
+      ),
     );
   }
 }

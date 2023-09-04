@@ -51,10 +51,8 @@ class _HeadersScreenState extends State<HeadersScreen> {
             return <Widget>[
               SliverAppBar(
                 title: const Text('Headers',
-                    style: TextStyle(
-                        fontFamily: 'OpenSans',
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700)),
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
                 pinned: true,
                 floating: true,
                 bottom: TabBar(
@@ -62,9 +60,7 @@ class _HeadersScreenState extends State<HeadersScreen> {
                   tabs: tabMaker(),
                   labelColor: Helpers.hexToColor('#393E46'),
                   labelStyle: const TextStyle(
-                      fontFamily: 'OpenSans',
-                      fontSize: 16,
-                      fontStyle: FontStyle.normal),
+                      fontSize: 16, fontStyle: FontStyle.normal),
                   indicatorColor: Helpers.hexToColor('#393E46'),
                   indicatorWeight: 1.0,
                   onTap: (index) {
@@ -73,7 +69,7 @@ class _HeadersScreenState extends State<HeadersScreen> {
                     });
                   },
                 ),
-              ),
+              )
             ];
           },
           body: FutureBuilder<TopHeadlines>(
@@ -88,7 +84,6 @@ class _HeadersScreenState extends State<HeadersScreen> {
                     child: Text(
                   'An error occurred while loading data.',
                   style: TextStyle(
-                    fontFamily: 'OpenSans',
                     fontSize: 16,
                   ),
                 ));

@@ -11,7 +11,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text('Personal'),
+      child: Text('Personal', style: TextStyle(fontSize: 16)),
     );
   }
 }

@@ -36,9 +36,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        useMaterial3: true,
-      ),
+      theme: ThemeData(useMaterial3: true, fontFamily: 'OpenSans'),
       home: const MyHomePage(),
     );
   }
@@ -91,8 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
         selectedItemColor: Helpers.hexToColor('#393E46'),
         selectedIconTheme:
             IconThemeData(color: Helpers.hexToColor('#393E46'), size: 32.0),
-        selectedLabelStyle: const TextStyle(
-            fontFamily: 'OpenSans', fontWeight: FontWeight.w700),
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w700),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

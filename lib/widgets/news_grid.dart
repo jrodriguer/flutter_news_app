@@ -36,10 +36,7 @@ class _NewsGridState extends State<NewsGrid> {
             padding: const EdgeInsetsDirectional.only(start: 12.0, end: 12.0),
             child: Text(
               article.title,
-              style: const TextStyle(
-                  fontFamily: 'OpenSans',
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
             ),
           ),
           Padding(
@@ -48,7 +45,6 @@ class _NewsGridState extends State<NewsGrid> {
             child: Text(
               article.description,
               style: const TextStyle(
-                fontFamily: 'OpenSans',
                 fontSize: 16,
               ),
             ),
@@ -78,7 +74,7 @@ class _NewsGridState extends State<NewsGrid> {
               ],
             ),
           ),
-          const Spacer(),
+          // const Spacer(),
           // GestureDetector(
           //   onTap: () => Navigator.pop(context),
           //   child: Container(
@@ -136,9 +132,7 @@ class _NewsGridState extends State<NewsGrid> {
                     child: Text(
                       widget.news[index].title,
                       style: const TextStyle(
-                          fontFamily: 'OpenSans',
-                          fontWeight: FontWeight.w700,
-                          fontSize: 12),
+                          fontWeight: FontWeight.w700, fontSize: 12),
                     ),
                   ),
                   GestureDetector(
