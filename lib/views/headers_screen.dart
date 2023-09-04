@@ -15,7 +15,7 @@ class HeadersScreen extends StatefulWidget {
 }
 
 class _HeadersScreenState extends State<HeadersScreen> {
-  List<String> tabsText = <String>[
+  final List<String> tabsText = <String>[
     'business',
     'entertainment',
     'general',
@@ -24,6 +24,11 @@ class _HeadersScreenState extends State<HeadersScreen> {
     'sports',
     'technology'
   ];
+  final List<Article> articles = <Article>[];
+  final News news = News();
+  int currentTabIndex = 0;
+  Logger logger = Logger(printer: PrettyPrinter());
+
   tabMaker() {
     List<Tab> tabs = [];
     for (var i = 0; i < tabsText.length; i++) {
@@ -33,12 +38,6 @@ class _HeadersScreenState extends State<HeadersScreen> {
     }
     return tabs;
   }
-
-  List<Article> articles = <Article>[];
-  String selectedCategory = '';
-  final News news = News();
-  int currentTabIndex = 0;
-  Logger logger = Logger(printer: PrettyPrinter());
 
   @override
   Widget build(BuildContext context) {
@@ -88,9 +87,13 @@ class _HeadersScreenState extends State<HeadersScreen> {
                   ),
                 ));
               } else if (snapshot.hasData) {
-                final articles = snapshot.data!.articles;
+                List<Article> fixedArticlesList = snapshot.data!.articles;
+
+                fixedArticlesList
+                    .removeWhere((article) => article.title == '[Removed]');
+
                 return LayoutBuilder(builder: (context, constraints) {
-                  return NewsGrid(news: articles);
+                  return NewsGrid(news: fixedArticlesList);
                 });
               } else {
                 logger.e('No data available.');
