@@ -92,9 +92,9 @@ class _HeadersScreenState extends State<HeadersScreen> {
                 fixedArticlesList
                     .removeWhere((article) => article.title == '[Removed]');
 
-                return LayoutBuilder(builder: (context, constraints) {
-                  return NewsGrid(news: fixedArticlesList);
-                });
+                // return LayoutBuilder(builder: (context, constraints) {
+                return NewsGrid(news: fixedArticlesList);
+                // });
               } else {
                 logger.e('No data available.');
                 return const Text('No data available.');
