@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/helpers/helpers.dart';
@@ -23,10 +24,17 @@ logs() {
   });
 }
 
-Future<void> main() async {
+void main() {
   logs();
+
   loggerNoStack.i('Going full screen');
-  runApp(const MyApp());
+
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
