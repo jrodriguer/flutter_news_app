@@ -96,12 +96,13 @@ class _NewsGridState extends State<NewsGrid> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: MasonryGridView.count(
-        crossAxisCount: 2,
+    return LayoutBuilder(builder: (context, constraints) {
+      return MasonryGridView.count(
+        crossAxisCount: constraints.maxWidth > 700 ? 4 : 2,
         mainAxisSpacing: 12,
         crossAxisSpacing: 8,
+        shrinkWrap: true,
+        padding: const EdgeInsets.all(20),
         itemCount: widget.news.length,
         itemBuilder: (context, index) {
           return Column(
@@ -148,7 +149,7 @@ class _NewsGridState extends State<NewsGrid> {
             ],
           );
         },
-      ),
-    );
+      );
+    });
   }
 }
