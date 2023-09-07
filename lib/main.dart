@@ -6,6 +6,7 @@ import 'package:flutter_news_app/views/favorites_screen.dart';
 import 'package:flutter_news_app/views/headers_screen.dart';
 import 'package:flutter_news_app/views/personal_screen.dart';
 import 'package:logger/logger.dart';
+import 'package:sizer/sizer.dart';
 
 typedef OnError = void Function(Exception exception);
 Logger logger = Logger(printer: PrettyPrinter());
@@ -42,11 +43,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(useMaterial3: true, fontFamily: 'OpenSans'),
-      home: const MyHomePage(),
-    );
+    return Sizer(builder: (context, orientation, deviceType) {
+      return MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(useMaterial3: true, fontFamily: 'OpenSans'),
+        home: const MyHomePage(),
+      );
+    });
   }
 }
 
