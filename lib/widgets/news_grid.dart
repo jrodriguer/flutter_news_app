@@ -105,49 +105,49 @@ class _NewsGridState extends State<NewsGrid> {
         padding: const EdgeInsets.all(20),
         itemCount: widget.news.length,
         itemBuilder: (context, index) {
-          return Column(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(6.5),
-                child: Image.network(
-                  widget.news[index].urlToImage,
-                  fit: BoxFit.cover,
-                  errorBuilder: (BuildContext context, Object error,
-                      StackTrace? stackTrace) {
-                    return const SizedBox(
-                      width: 200,
-                      height: 100,
-                      child: ColoredBox(
-                        color: Colors.grey,
-                        child: Icon(Icons.broken_image_outlined),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          return Container(
+              padding: const EdgeInsets.all(10),
+              decoration:
+                  BoxDecoration(border: Border.all(color: Colors.black)),
+              child: Column(
                 children: [
-                  Expanded(
-                    child: Text(
-                      widget.news[index].title,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w700, fontSize: 12),
+                  ClipRRect(
+                    child: Image.network(
+                      widget.news[index].urlToImage,
+                      fit: BoxFit.cover,
+                      errorBuilder: (BuildContext context, Object error,
+                          StackTrace? stackTrace) {
+                        return const SizedBox(
+                          width: 200,
+                          height: 100,
+                          child: Icon(Icons.broken_image_outlined),
+                        );
+                      },
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () => _showNewsDetails(index),
-                    child: const Column(
-                      children: [
-                        Icon(Icons.more_horiz),
-                      ],
-                    ),
-                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          widget.news[index].title,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 12),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () => _showNewsDetails(index),
+                        child: const Column(
+                          children: [
+                            Icon(Icons.more_horiz),
+                          ],
+                        ),
+                      ),
+                    ],
+                  )
                 ],
-              )
-            ],
-          );
+              ));
         },
       );
     });
