@@ -1,3 +1,4 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/models/article.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -40,16 +41,6 @@ class _NewsGridState extends State<NewsGrid> {
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
             ),
           ),
-          Padding(
-            padding:
-                const EdgeInsetsDirectional.only(start: 12, top: 7, end: 12),
-            child: Text(
-              article.description,
-              style: const TextStyle(
-                fontSize: 16,
-              ),
-            ),
-          ),
           const SizedBox(height: 17),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 7, horizontal: 15),
@@ -61,35 +52,41 @@ class _NewsGridState extends State<NewsGrid> {
           Container(
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                ListTile(
-                  leading: Icon(Icons.copy),
-                  title: Text('Copy Link'),
-                ),
-                ListTile(
+                GestureDetector(
+                    onTap: () async {
+                      FlutterClipboard.copy(article.url).then((value) {
+                        return ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Text Copied'),
+                          ),
+                        );
+                      });
+                    },
+                    child: const ListTile(
+                      leading: Icon(Icons.copy),
+                      title: Text('Copy Link'),
+                    )),
+                const ListTile(
                   leading: Icon(Icons.favorite_border_outlined),
                   title: Text('Favorite'),
                 ),
               ],
             ),
           ),
-          // const Spacer(),
-          // GestureDetector(
-          //   onTap: () => Navigator.pop(context),
-          //   child: Container(
-          //     padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 26),
-          //     decoration: BoxDecoration(
-          //       borderRadius: BorderRadius.circular(30),
-          //       color: Colors.grey.shade300,
-          //     ),
-          //     child: const Text(
-          //       "Close",
-          //       style: TextStyle(fontWeight: FontWeight.w600),
-          //     ),
-          //   ),
-          // ),
+          const Spacer(),
+          GestureDetector(
+            onTap: () => Navigator.pop(context),
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 26),
+              child: const Text(
+                "Close",
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -107,7 +104,7 @@ class _NewsGridState extends State<NewsGrid> {
         itemCount: widget.news.length,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () => _showNewsDetails(index),
+            onDoubleTap: () => _showNewsDetails(index),
             child: Container(
                 padding: const EdgeInsets.all(20),
                 decoration:
