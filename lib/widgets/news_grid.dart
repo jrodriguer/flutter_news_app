@@ -99,8 +99,8 @@ class _NewsGridState extends State<NewsGrid> {
     return LayoutBuilder(builder: (context, constraints) {
       return MasonryGridView.count(
         crossAxisCount: constraints.maxWidth > 700 ? 4 : 2,
-        mainAxisSpacing: 12,
-        crossAxisSpacing: 8,
+        mainAxisSpacing: 16,
+        crossAxisSpacing: 16,
         shrinkWrap: true,
         padding: const EdgeInsets.all(20),
         itemCount: widget.news.length,
