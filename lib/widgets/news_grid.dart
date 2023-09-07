@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/models/article.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:sizer/sizer.dart';
 
 class NewsGrid extends StatefulWidget {
   final List<Article> news;
@@ -33,15 +34,15 @@ class _NewsGridState extends State<NewsGrid> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsetsDirectional.only(start: 12.0, end: 12.0),
+            padding: const EdgeInsetsDirectional.only(start: 12, end: 12),
             child: Text(
               article.title,
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
             ),
           ),
           Padding(
-            padding: const EdgeInsetsDirectional.only(
-                start: 12.0, top: 7.0, end: 12.0),
+            padding:
+                const EdgeInsetsDirectional.only(start: 12, top: 7, end: 12),
             child: Text(
               article.description,
               style: const TextStyle(
@@ -49,9 +50,9 @@ class _NewsGridState extends State<NewsGrid> {
               ),
             ),
           ),
-          const SizedBox(height: 17.0),
+          const SizedBox(height: 17),
           const Padding(
-            padding: EdgeInsets.symmetric(vertical: 7.0, horizontal: 15.0),
+            padding: EdgeInsets.symmetric(vertical: 7, horizontal: 15),
             child: Divider(
               color: Colors.grey,
               height: 5,
@@ -59,7 +60,7 @@ class _NewsGridState extends State<NewsGrid> {
           ),
           Container(
             alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -98,19 +99,20 @@ class _NewsGridState extends State<NewsGrid> {
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       return MasonryGridView.count(
-        crossAxisCount: constraints.maxWidth > 700 ? 4 : 2,
+        crossAxisCount: constraints.maxWidth > 700 ? 4 : 1,
         mainAxisSpacing: 16,
         crossAxisSpacing: 16,
         shrinkWrap: true,
         padding: const EdgeInsets.all(20),
         itemCount: widget.news.length,
         itemBuilder: (context, index) {
-          return Container(
-              padding: const EdgeInsets.all(10),
-              decoration:
-                  BoxDecoration(border: Border.all(color: Colors.black)),
-              child: Column(
-                children: [
+          return GestureDetector(
+            onTap: () => _showNewsDetails(index),
+            child: Container(
+                padding: const EdgeInsets.all(20),
+                decoration:
+                    BoxDecoration(border: Border.all(color: Colors.black)),
+                child: Column(children: [
                   ClipRRect(
                     child: Image.network(
                       widget.news[index].urlToImage,
@@ -125,29 +127,37 @@ class _NewsGridState extends State<NewsGrid> {
                       },
                     ),
                   ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          widget.news[index].title,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 12),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () => _showNewsDetails(index),
-                        child: const Column(
-                          children: [
-                            Icon(Icons.more_horiz),
-                          ],
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              ));
+                  Container(
+                      margin: const EdgeInsets.only(top: 15, bottom: 15),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              widget.news[index].title,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700, fontSize: 12.sp),
+                            ),
+                          ),
+                        ],
+                      )),
+                  Container(
+                      margin: const EdgeInsets.only(bottom: 12.8),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              widget.news[index].description,
+                              style: TextStyle(fontSize: 12.sp),
+                            ),
+                          ),
+                        ],
+                      ))
+                ])),
+          );
         },
       );
     });
