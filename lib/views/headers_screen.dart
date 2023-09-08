@@ -88,11 +88,9 @@ class _HeadersScreenState extends State<HeadersScreen> {
                 ));
               } else if (snapshot.hasData) {
                 List<Article> fixedArticlesList = snapshot.data!.articles;
-
                 fixedArticlesList
                     .removeWhere((article) => article.title == '[Removed]');
 
-                // return LayoutBuilder(builder: (context, constraints) {
                 return NewsGrid(news: fixedArticlesList);
                 // });
               } else {
