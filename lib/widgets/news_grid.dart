@@ -2,7 +2,6 @@ import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/models/article.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:sizer/sizer.dart';
 
 class NewsGrid extends StatefulWidget {
   final List<Article> news;
@@ -77,16 +76,16 @@ class _NewsGridState extends State<NewsGrid> {
             ),
           ),
           const Spacer(),
-          GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 26),
-              child: const Text(
-                "Close",
-                style: TextStyle(fontWeight: FontWeight.w600),
-              ),
-            ),
-          ),
+          //     GestureDetector(
+          //       onTap: () => Navigator.pop(context),
+          //       child: Container(
+          //         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 26),
+          //         child: const Text(
+          //           "Close",
+          //           style: TextStyle(fontWeight: FontWeight.w600),
+          //         ),
+          //       ),
+          //     ),
         ],
       ),
     );
@@ -96,7 +95,11 @@ class _NewsGridState extends State<NewsGrid> {
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       return MasonryGridView.count(
-        crossAxisCount: constraints.maxWidth > 700 ? 4 : 1,
+        crossAxisCount: constraints.maxWidth > 900.0
+            ? 4
+            : constraints.maxWidth > 700.0
+                ? 2
+                : 1,
         mainAxisSpacing: 16,
         crossAxisSpacing: 16,
         shrinkWrap: true,
@@ -125,7 +128,8 @@ class _NewsGridState extends State<NewsGrid> {
                     ),
                   ),
                   Container(
-                      margin: const EdgeInsets.only(top: 15, bottom: 15),
+                      margin:
+                          const EdgeInsets.only(top: 14.976, bottom: 14.976),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -133,8 +137,8 @@ class _NewsGridState extends State<NewsGrid> {
                           Expanded(
                             child: Text(
                               widget.news[index].title,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 12.sp),
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w700, fontSize: 16),
                             ),
                           ),
                         ],
@@ -148,7 +152,7 @@ class _NewsGridState extends State<NewsGrid> {
                           Expanded(
                             child: Text(
                               widget.news[index].description,
-                              style: TextStyle(fontSize: 12.sp),
+                              style: const TextStyle(fontSize: 16),
                             ),
                           ),
                         ],
