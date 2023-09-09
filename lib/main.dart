@@ -93,13 +93,13 @@ class _MyHomePageState extends State<MyHomePage> {
             index = i;
           });
         },
-        elevation: 16.0,
+        elevation: 16,
         showUnselectedLabels: true,
         mouseCursor: SystemMouseCursors.grab,
         selectedFontSize: 16,
         selectedItemColor: Helpers.hexToColor('#393E46'),
         selectedIconTheme:
-            IconThemeData(color: Helpers.hexToColor('#393E46'), size: 32.0),
+            IconThemeData(color: Helpers.hexToColor('#393E46'), size: 32),
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w700),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
