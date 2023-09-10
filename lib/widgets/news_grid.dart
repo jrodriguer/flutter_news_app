@@ -17,7 +17,7 @@ class NewsGrid extends StatefulWidget {
 
 class _NewsGridState extends State<NewsGrid> {
   final DataLocal dataLocal = DataLocal();
-  String favoriteTile = 'In favorites';
+  String favoriteTile = 'Add to favorites';
 
   void _showNewsDetails(int index) {
     showModalBottomSheet<void>(
@@ -66,7 +66,6 @@ class _NewsGridState extends State<NewsGrid> {
                           ),
                         );
                       });
-                      Navigator.of(context).pop();
                     },
                     child: const ListTile(
                       leading: Icon(Icons.copy),
@@ -75,6 +74,7 @@ class _NewsGridState extends State<NewsGrid> {
                 GestureDetector(
                     onTap: () async {
                       if (widget.onFavorites) {
+                        favoriteTile = 'Delete favorite';
                         await dataLocal.deleteNew(article);
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
@@ -83,7 +83,6 @@ class _NewsGridState extends State<NewsGrid> {
                         );
                         Navigator.of(context).pop();
                       } else {
-                        favoriteTile = 'Remove from favorites';
                         await dataLocal.saveNew(article);
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
