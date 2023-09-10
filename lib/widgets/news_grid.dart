@@ -17,6 +17,7 @@ class NewsGrid extends StatefulWidget {
 
 class _NewsGridState extends State<NewsGrid> {
   final DataLocal dataLocal = DataLocal();
+  String favoriteTile = 'In favorites';
 
   void _showNewsDetails(int index) {
     showModalBottomSheet<void>(
@@ -29,8 +30,6 @@ class _NewsGridState extends State<NewsGrid> {
   }
 
   Widget _buildNewsDetailsSheet(Article article) {
-    String favoriteTile = 'In favorites';
-
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 30),
       height: MediaQuery.of(context).size.height / 2,
