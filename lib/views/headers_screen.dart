@@ -91,7 +91,7 @@ class _HeadersScreenState extends State<HeadersScreen> {
                 fixedArticlesList
                     .removeWhere((article) => article.title == '[Removed]');
 
-                return NewsGrid(news: fixedArticlesList);
+                return NewsGrid(news: fixedArticlesList, onFavorites: false);
                 // });
               } else {
                 logger.e('No data available.');

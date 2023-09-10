@@ -38,7 +38,7 @@ class DataLocal {
       favorites = favoritesData.map((item) => Article.fromJson(item)).toList();
     }
 
-    // Ussing firstWhere method if no element satisfies the condition, it throws a StateError
+    // Using firstWhere method if no element satisfies the condition, it throws a StateError
     final exists =
         favorites.firstWhereOrNull((fav) => fav.title == evNew.title);
 

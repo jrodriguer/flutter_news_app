@@ -1,21 +1,23 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/models/article.dart';
+import 'package:flutter_news_app/services/data_local.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class NewsGrid extends StatefulWidget {
   final List<Article> news;
+  final bool onFavorites;
 
-  const NewsGrid({
-    Key? key,
-    required this.news,
-  }) : super(key: key);
+  const NewsGrid({Key? key, required this.news, required this.onFavorites})
+      : super(key: key);
 
   @override
   State<NewsGrid> createState() => _NewsGridState();
 }
 
 class _NewsGridState extends State<NewsGrid> {
+  final DataLocal dataLocal = DataLocal();
+
   void _showNewsDetails(int index) {
     showModalBottomSheet<void>(
       backgroundColor: Colors.transparent,
@@ -27,6 +29,8 @@ class _NewsGridState extends State<NewsGrid> {
   }
 
   Widget _buildNewsDetailsSheet(Article article) {
+    String favoriteTile = 'In favorites';
+
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 30),
       height: MediaQuery.of(context).size.height / 2,
@@ -68,10 +72,29 @@ class _NewsGridState extends State<NewsGrid> {
                       leading: Icon(Icons.copy),
                       title: Text('Copy Link'),
                     )),
-                const ListTile(
-                  leading: Icon(Icons.favorite_border_outlined),
-                  title: Text('Favorite'),
-                ),
+                GestureDetector(
+                    onTap: () async {
+                      if (widget.onFavorites) {
+                        await dataLocal.deleteNew(article);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Delete favorite'),
+                          ),
+                        );
+                      } else {
+                        favoriteTile = 'Remove from favorites';
+                        await dataLocal.saveNew(article);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Added to favorites'),
+                          ),
+                        );
+                      }
+                    },
+                    child: ListTile(
+                      leading: const Icon(Icons.favorite_border_outlined),
+                      title: Text(favoriteTile),
+                    )),
               ],
             ),
           ),
