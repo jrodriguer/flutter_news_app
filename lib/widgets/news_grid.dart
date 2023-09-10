@@ -66,6 +66,7 @@ class _NewsGridState extends State<NewsGrid> {
                           ),
                         );
                       });
+                      Navigator.of(context).pop();
                     },
                     child: const ListTile(
                       leading: Icon(Icons.copy),
@@ -80,6 +81,7 @@ class _NewsGridState extends State<NewsGrid> {
                             content: Text('Delete favorite'),
                           ),
                         );
+                        Navigator.of(context).pop();
                       } else {
                         favoriteTile = 'Remove from favorites';
                         await dataLocal.saveNew(article);
@@ -88,6 +90,7 @@ class _NewsGridState extends State<NewsGrid> {
                             content: Text('Added to favorites'),
                           ),
                         );
+                        Navigator.of(context).pop();
                       }
                     },
                     child: ListTile(
