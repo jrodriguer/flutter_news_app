@@ -1,9 +1,7 @@
 import 'dart:convert';
 
 import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_news_app/models/article.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -11,16 +9,6 @@ class DataLocal {
   Logger logger = Logger(printer: PrettyPrinter());
   List<Article> articles = <Article>[];
   bool databaseCreated = false;
-
-  Future<void> presentToast(String message) async {
-    Fluttertoast.showToast(
-        msg: message,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-        textColor: Colors.white,
-        fontSize: 16.0);
-  }
 
   Future<SharedPreferences> createDatabase() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -46,8 +34,6 @@ class DataLocal {
       favorites.insert(0, evNew);
       final favoritesData = favorites.map((item) => item.toJson()).toList();
       prefs.setString('favorites', json.encode(favoritesData));
-
-      presentToast('Add to favorites');
     }
   }
 
@@ -66,6 +52,5 @@ class DataLocal {
     articles.removeWhere((article) => article.title == evNew.title);
     final favoritesData = articles.map((item) => item.toJson()).toList();
     prefs.setString('favorites', json.encode(favoritesData));
-    presentToast('Delete favorite article');
   }
 }
