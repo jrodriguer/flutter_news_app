@@ -1,3 +1,5 @@
+import 'dart:developer' as dev;
+
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -5,30 +7,25 @@ import 'package:flutter_news_app/helpers/helpers.dart';
 import 'package:flutter_news_app/views/favorites_screen.dart';
 import 'package:flutter_news_app/views/headers_screen.dart';
 import 'package:flutter_news_app/views/personal_screen.dart';
-import 'package:logger/logger.dart';
+import 'package:logging/logging.dart';
 import 'package:sizer/sizer.dart';
 
 typedef OnError = void Function(Exception exception);
-Logger logger = Logger(printer: PrettyPrinter());
-Logger loggerNoStack = Logger(
-  printer: PrettyPrinter(methodCount: 0),
-);
 
-logs() {
-  if (kReleaseMode) {
-    Logger.level = Level.warning;
-  }
-
-  Logger.addLogListener((record) {
-    debugPrint('${record.level.name}: ${record.time}: '
-        '${record.message}');
+Future<void> main() async {
+  Logger.root.onRecord.listen((record) {
+    dev.log(
+      record.message,
+      time: record.time,
+      level: record.level.value,
+      name: record.loggerName,
+      zone: record.zone,
+      error: record.error,
+      stackTrace: record.stackTrace,
+    );
   });
-}
 
-void main() {
-  logs();
-
-  loggerNoStack.i('Going full screen');
+  _log.info('Going full screen');
 
   runApp(
     DevicePreview(
@@ -37,6 +34,8 @@ void main() {
     ),
   );
 }
+
+Logger _log = Logger('main.dart');
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
