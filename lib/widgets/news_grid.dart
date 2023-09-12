@@ -17,7 +17,7 @@ class NewsGrid extends StatefulWidget {
 
 class _NewsGridState extends State<NewsGrid> {
   final DataLocal dataLocal = DataLocal();
-  String favoriteTile = 'Add to favorites';
+  Map<String, bool> favoriteStates = {};
 
   void _showNewsDetails(int index) {
     showModalBottomSheet<void>(
@@ -30,6 +30,9 @@ class _NewsGridState extends State<NewsGrid> {
   }
 
   Widget _buildNewsDetailsSheet(Article article) {
+    final isFavorite = favoriteStates[article.id] ?? false;
+    final String favoriteTile = isFavorite ? 'Delete favorite' : 'Add to favorites';
+
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 30),
       height: MediaQuery.of(context).size.height / 2,
@@ -74,42 +77,30 @@ class _NewsGridState extends State<NewsGrid> {
                 GestureDetector(
                     onTap: () async {
                       if (widget.onFavorites) {
-                        favoriteTile = 'Delete favorite';
-                        await dataLocal.deleteNew(article);
+                        if (isFavorite) {
+                          await dataLocal.deleteNew(article);
+                        } else {
+                          await dataLocal.saveNew(article);
+                        }
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Delete favorite'),
+                          SnackBar(
+                            content: Text(isFavorite ? 'Delete favorite' : 'Add to favorites'),
                           ),
                         );
-                        Navigator.of(context).pop();
-                      } else {
-                        await dataLocal.saveNew(article);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Added to favorites'),
-                          ),
-                        );
-                        Navigator.of(context).pop();
-                      }
+                        setState(() {
+                          favoriteStates[article.id] = !isFavorite;
+                        });
+                      }                       
+                      Navigator.of(context).pop();
                     },
                     child: ListTile(
                       leading: const Icon(Icons.favorite_border_outlined),
-                      title: Text(favoriteTile),
+                      title: Text(favoriteTile)
                     )),
               ],
             ),
           ),
           const Spacer(),
-          //     GestureDetector(
-          //       onTap: () => Navigator.pop(context),
-          //       child: Container(
-          //         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 26),
-          //         child: const Text(
-          //           "Close",
-          //           style: TextStyle(fontWeight: FontWeight.w600),
-          //         ),
-          //       ),
-          //     ),
         ],
       ),
     );
