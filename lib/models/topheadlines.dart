@@ -8,9 +8,9 @@ TopHeadlines topHeadlinesFromJson(String str) =>
 String topHeadlinesToJson(TopHeadlines data) => json.encode(data.toJson());
 
 class TopHeadlines {
-  String status;
-  int totalResults;
-  List<Article> articles;
+  final String status;
+  final int totalResults;
+  final List<Article> articles;
 
   TopHeadlines({
     required this.status,

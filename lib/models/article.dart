@@ -2,7 +2,7 @@ import 'package:flutter_news_app/models/source.dart';
 
 class Article {
   Source source;
-  final String id;
+  // final String id;
   String? author;
   String title;
   String description;
@@ -13,7 +13,7 @@ class Article {
 
   Article({
     required this.source,
-    required this.id,
+    // required this.id,
     this.author,
     required this.title,
     required this.description,
@@ -25,7 +25,7 @@ class Article {
 
   factory Article.fromJson(Map<String, dynamic> json) => Article(
         source: Source.fromJson(json["source"]),
-        id: json["id"],
+        // id: json["id"],
         author: json["author"],
         title: json["title"],
         description: json["description"] ?? "",
@@ -37,7 +37,7 @@ class Article {
 
   Map<String, dynamic> toJson() => {
         "source": source.toJson(),
-        "id": id,
+        // "id": id,
         "author": author,
         "title": title,
         "description": description,
