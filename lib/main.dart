@@ -5,30 +5,20 @@ import 'package:flutter_news_app/helpers/helpers.dart';
 import 'package:flutter_news_app/views/favorites_screen.dart';
 import 'package:flutter_news_app/views/headers_screen.dart';
 import 'package:flutter_news_app/views/personal_screen.dart';
-import 'package:logger/logger.dart';
+import 'package:logging/logging.dart';
 import 'package:sizer/sizer.dart';
 
-typedef OnError = void Function(Exception exception);
-Logger logger = Logger(printer: PrettyPrinter());
-Logger loggerNoStack = Logger(
-  printer: PrettyPrinter(methodCount: 0),
-);
-
-logs() {
-  if (kReleaseMode) {
-    Logger.level = Level.warning;
-  }
-
-  Logger.addLogListener((record) {
-    debugPrint('${record.level.name}: ${record.time}: '
-        '${record.message}');
-  });
-}
-
 void main() {
-  logs();
+  if (kReleaseMode) {
+    Logger.root.level = Level.WARNING;
+  }
+  Logger.root.onRecord.listen((record) {
+    debugPrint('${record.level.name}: ${record.time}: '
+      '${record.loggerName}: '
+      '${record.message}: ');
+  });
 
-  loggerNoStack.i('Going full screen');
+  _log.info('Going full screen');
 
   runApp(
     DevicePreview(
@@ -37,6 +27,8 @@ void main() {
     ),
   );
 }
+
+Logger _log = Logger('main.dart');
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -89,6 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: index,
         onTap: (i) {
+          _log.info(() => 'Clicked on bottom navigation bar, index position: $i');
           setState(() {
             index = i;
           });

@@ -5,7 +5,7 @@ import 'package:flutter_news_app/models/topheadlines.dart';
 import 'package:flutter_news_app/services/news.dart';
 import 'package:flutter_news_app/widgets/news_grid.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:logger/logger.dart';
+import 'package:logging/logging.dart';
 
 class HeadersScreen extends StatefulWidget {
   const HeadersScreen({Key? key}) : super(key: key);
@@ -15,6 +15,7 @@ class HeadersScreen extends StatefulWidget {
 }
 
 class _HeadersScreenState extends State<HeadersScreen> {
+  static final _log = Logger('HeadersScreen');
   final List<String> tabsText = <String>[
     'business',
     'entertainment',
@@ -27,7 +28,6 @@ class _HeadersScreenState extends State<HeadersScreen> {
   final List<Article> articles = <Article>[];
   final News news = News();
   int currentTabIndex = 0;
-  Logger logger = Logger(printer: PrettyPrinter());
 
   tabMaker() {
     List<Tab> tabs = [];
@@ -78,7 +78,7 @@ class _HeadersScreenState extends State<HeadersScreen> {
                 return const Center(
                     child: SpinKitRotatingPlain(color: Colors.black87));
               } else if (snapshot.hasError) {
-                logger.e('${snapshot.error}');
+                _log.severe('${snapshot.error}');
                 return const Center(
                     child: Text(
                   'An error occurred while loading data.',
@@ -93,7 +93,7 @@ class _HeadersScreenState extends State<HeadersScreen> {
 
                 return NewsGrid(news: fixedArticlesList, onFavorites: false);
               } else {
-                logger.e('No data available.');
+                _log.severe('No data available.');
                 return const Text('No data available.');
               }
             },
