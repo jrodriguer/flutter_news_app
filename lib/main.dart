@@ -3,14 +3,14 @@ import 'dart:developer' as dev;
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_news_app/helpers/helpers.dart';
-import 'package:flutter_news_app/views/favorites_screen.dart';
-import 'package:flutter_news_app/views/headers_screen.dart';
-import 'package:flutter_news_app/views/personal_screen.dart';
+import 'package:flutter/services.dart';
 import 'package:logging/logging.dart';
 import 'package:sizer/sizer.dart';
 
-typedef OnError = void Function(Exception exception);
+import 'helpers/helpers.dart';
+import 'views/favorites_screen.dart';
+import 'views/headers_screen.dart';
+import 'views/personal_screen.dart';
 
 Future<void> main() async {
   Logger.root.onRecord.listen((record) {
@@ -25,7 +25,12 @@ Future<void> main() async {
     );
   });
 
+  WidgetsFlutterBinding.ensureInitialized();
+
   _log.info('Going full screen');
+  SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.edgeToEdge,
+  );
 
   runApp(
     DevicePreview(
@@ -88,6 +93,8 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: index,
         onTap: (i) {
+          _log.info(
+              () => 'Clicked on bottom navigation bar, index position: $i');
           setState(() {
             index = i;
           });

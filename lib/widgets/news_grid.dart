@@ -30,8 +30,8 @@ class _NewsGridState extends State<NewsGrid> {
   }
 
   Widget _buildNewsDetailsSheet(Article article) {
-    final isFavorite = favoriteStates[article.id] ?? false;
-    final String favoriteTile = isFavorite ? 'Delete favorite' : 'Add to favorites';
+    // final isFavorite = favoriteStates[article.id] ?? false;
+    // final String favoriteTile = isFavorite ? 'Delete favorite' : 'Add to favorites';
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 30),
@@ -77,26 +77,25 @@ class _NewsGridState extends State<NewsGrid> {
                 GestureDetector(
                     onTap: () async {
                       if (widget.onFavorites) {
-                        if (isFavorite) {
-                          await dataLocal.deleteNew(article);
-                        } else {
-                          await dataLocal.saveNew(article);
-                        }
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(isFavorite ? 'Delete favorite' : 'Add to favorites'),
-                          ),
-                        );
+                        // if (isFavorite) {
+                        //   await dataLocal.deleteNew(article);
+                        // } else {
+                        //   await dataLocal.saveNew(article);
+                        // }
+                        // ScaffoldMessenger.of(context).showSnackBar(
+                        //   SnackBar(
+                        //     content: Text(isFavorite ? 'Delete favorite' : 'Add to favorites'),
+                        //   ),
+                        // );
                         setState(() {
-                          favoriteStates[article.id] = !isFavorite;
+                          // favoriteStates[article.id] = !isFavorite;
                         });
-                      }                       
+                      }
                       Navigator.of(context).pop();
                     },
-                    child: ListTile(
-                      leading: const Icon(Icons.favorite_border_outlined),
-                      title: Text(favoriteTile)
-                    )),
+                    child: const ListTile(
+                        leading: Icon(Icons.favorite_border_outlined),
+                        title: Text('Favorite'))),
               ],
             ),
           ),
