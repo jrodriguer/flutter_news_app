@@ -1,16 +1,19 @@
 import 'dart:developer' as dev;
 
 import 'package:device_preview/device_preview.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logging/logging.dart';
 import 'package:sizer/sizer.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'helpers/helpers.dart';
 import 'views/favorites_screen.dart';
 import 'views/headers_screen.dart';
 import 'views/personal_screen.dart';
+import 'firebase_options.dart';
 
 Future<void> main() async {
   Logger.root.onRecord.listen((record) {
@@ -27,6 +30,10 @@ Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
 
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   _log.info('Going full screen');
   SystemChrome.setEnabledSystemUIMode(
     SystemUiMode.edgeToEdge,
@@ -39,6 +46,11 @@ Future<void> main() async {
     ),
   );
 }
+
+// TODO: Request permission
+// TODO: Register with FCM
+// TODO: Set up foreground message handler
+// TODO: Set up background message handler
 
 Logger _log = Logger('main.dart');
 
