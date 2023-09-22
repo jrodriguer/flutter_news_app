@@ -24,6 +24,7 @@ dependencies:
   logging: ^1.2.0
   firebase_core: ^2.16.0
   firebase_messaging: ^14.6.8
+  rxdart: ^0.27.7
 
 dev_dependencies:
   flutter_test:
