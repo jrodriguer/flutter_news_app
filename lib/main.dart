@@ -2,19 +2,19 @@ import 'dart:developer' as dev;
 
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logging/logging.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:sizer/sizer.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
+import 'firebase_options.dart';
 import 'helpers/helpers.dart';
 import 'views/favorites_screen.dart';
 import 'views/headers_screen.dart';
 import 'views/personal_screen.dart';
-import 'firebase_options.dart';
 
 final _messageStreamController = BehaviorSubject<RemoteMessage>();
 
@@ -64,7 +64,21 @@ Future<void> main() async {
     print('Permission granted: ${settings.authorizationStatus}');
   }
 
-  // TODO: Register with FCM
+  const vapidKey = 'gbKTakLzABNT34US-G209tDvWa8pdknTx2nXhizW8dM';
+
+  String? token = await messaging.getToken();
+
+  if (DefaultFirebaseOptions.currentPlatform == DefaultFirebaseOptions.web) {
+    token = await messaging.getToken(
+      vapidKey: vapidKey,
+    );
+  } else {
+    token = await messaging.getToken();
+  }
+
+  if (kDebugMode) {
+    print('Registration Token=$token');
+  }
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     if (kDebugMode) {
