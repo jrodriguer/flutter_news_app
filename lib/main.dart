@@ -23,7 +23,6 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
   if (kDebugMode) {
     print("Handling a background message: ${message.messageId}");
-    print('Message data: ${message.data}');
     print('Message notification: ${message.notification?.title}');
     print('Message notification: ${message.notification?.body}');
   }
@@ -48,9 +47,9 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  final messaging = FirebaseMessaging.instance;
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
 
-  final settings = await messaging.requestPermission(
+  NotificationSettings settings = await messaging.requestPermission(
     alert: true,
     announcement: false,
     badge: true,
@@ -83,7 +82,6 @@ Future<void> main() async {
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     if (kDebugMode) {
       print('Handling a foreground message: ${message.messageId}');
-      print('Message data: ${message.data}');
       print('Message notification: ${message.notification?.title}');
       print('Message notification: ${message.notification?.body}');
     }
@@ -97,6 +95,9 @@ Future<void> main() async {
   SystemChrome.setEnabledSystemUIMode(
     SystemUiMode.edgeToEdge,
   );
+
+  const topic = 'allusers';
+  await messaging.subscribeToTopic(topic);
 
   runApp(
     DevicePreview(
@@ -149,16 +150,6 @@ class _MyHomePageState extends State<MyHomePage> {
       });
     });
   }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  // }
-  //
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
