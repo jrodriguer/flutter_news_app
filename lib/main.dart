@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:logging/logging.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:sizer/sizer.dart';
@@ -16,10 +17,13 @@ import 'views/favorites_screen.dart';
 import 'views/headers_screen.dart';
 import 'views/personal_screen.dart';
 
-final _messageStreamController = BehaviorSubject<RemoteMessage>();
+final BehaviorSubject<RemoteMessage> _messageStreamController =
+    BehaviorSubject<RemoteMessage>();
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await setupFlutterNotifications();
+  // TODO: Show notifications
 
   if (kDebugMode) {
     print("Handling a background message: ${message.messageId}");
@@ -27,6 +31,46 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     print('Message notification: ${message.notification?.body}');
   }
 }
+
+/// Create a [AndroidNotificationChannel] for heads up notifications
+late AndroidNotificationChannel channel;
+
+bool isFlutterLocalNotificationsInitialized = false;
+
+Future<void> setupFlutterNotifications() async {
+  if (isFlutterLocalNotificationsInitialized) {
+    return;
+  }
+  channel = const AndroidNotificationChannel(
+    'high_importance_channel',
+    'High Importance Notifications',
+    description: 'This channel is used for important notifications.',
+    importance: Importance.high,
+  );
+
+  flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+  /// Create an Android Notification Channel.
+  ///
+  /// We use this channel in the `AndroidManifest.xml` file to override the
+  /// default FCM channel to enable heads up notifications.
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(channel);
+
+  /// Update the iOS foreground notification presentation options to allow
+  /// heads up notifications.
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+  isFlutterLocalNotificationsInitialized = true;
+}
+
+/// Initialize the [FlutterLocalNotificationsPlugin] package.
+late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
 Future<void> main() async {
   Logger.root.onRecord.listen((record) {
@@ -49,6 +93,7 @@ Future<void> main() async {
 
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 
+  // TODO: Move to Permissions Widget file
   NotificationSettings settings = await messaging.requestPermission(
     alert: true,
     announcement: false,
@@ -58,13 +103,19 @@ Future<void> main() async {
     provisional: false,
     sound: true,
   );
-
   if (kDebugMode) {
-    print('Permission granted: ${settings.authorizationStatus}');
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      print('User granted permission');
+    } else if (settings.authorizationStatus ==
+        AuthorizationStatus.provisional) {
+      print('User granted provisional permission');
+    } else {
+      print('User declined or has not accepted permission');
+    }
   }
 
-  const vapidKey = 'gbKTakLzABNT34US-G209tDvWa8pdknTx2nXhizW8dM';
-
+  // TODO: Move to Token Widget file
+  const String vapidKey = 'gbKTakLzABNT34US-G209tDvWa8pdknTx2nXhizW8dM';
   String? token = await messaging.getToken();
 
   if (DefaultFirebaseOptions.currentPlatform == DefaultFirebaseOptions.web) {
@@ -96,7 +147,7 @@ Future<void> main() async {
     SystemUiMode.edgeToEdge,
   );
 
-  const topic = 'allusers';
+  const String topic = 'all-users';
   await messaging.subscribeToTopic(topic);
 
   runApp(
@@ -132,23 +183,31 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String _lastMessage = '';
-
   int index = 0;
 
-  _MyHomePageState() {
-    _messageStreamController.listen((message) {
-      setState(() {
-        if (message.notification != null) {
-          _lastMessage = 'Received a notification message:'
-              '\nTitle=${message.notification?.title},'
-              '\nBody=${message.notification?.body},'
-              '\nData=${message.data}';
-        } else {
-          _lastMessage = 'Received a data message: ${message.data}';
-        }
-      });
-    });
+  Future<void> setupInteractedMessage() async {
+    RemoteMessage? initialMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
+
+    if (initialMessage != null) {
+      _handleMessage(initialMessage);
+    }
+
+    // Stream listener
+    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+  }
+
+  void _handleMessage(RemoteMessage message) {
+    if (message.data['type'] == 'chat') {}
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Run code required to handle interacted messages in an async function
+    // as initState() must not be async
+    setupInteractedMessage();
   }
 
   @override

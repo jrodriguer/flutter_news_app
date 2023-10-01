@@ -95,7 +95,7 @@ class _NewsGridState extends State<NewsGrid> {
                     },
                     child: const ListTile(
                         leading: Icon(Icons.favorite_border_outlined),
-                        title: Text('Favorite'))),
+                        title: Text('Favorite')))
               ],
             ),
           ),
