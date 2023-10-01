@@ -23,6 +23,7 @@ final BehaviorSubject<RemoteMessage> _messageStreamController =
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await setupFlutterNotifications();
+
   // TODO: Show notifications
 
   if (kDebugMode) {
@@ -93,42 +94,13 @@ Future<void> main() async {
 
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 
-  // TODO: Move to Permissions Widget file
-  NotificationSettings settings = await messaging.requestPermission(
-    alert: true,
-    announcement: false,
-    badge: true,
-    carPlay: false,
-    criticalAlert: false,
-    provisional: false,
-    sound: true,
-  );
-  if (kDebugMode) {
-    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      print('User granted permission');
-    } else if (settings.authorizationStatus ==
-        AuthorizationStatus.provisional) {
-      print('User granted provisional permission');
-    } else {
-      print('User declined or has not accepted permission');
-    }
-  }
-
-  // TODO: Move to Token Widget file
-  const String vapidKey = 'gbKTakLzABNT34US-G209tDvWa8pdknTx2nXhizW8dM';
-  String? token = await messaging.getToken();
-
-  if (DefaultFirebaseOptions.currentPlatform == DefaultFirebaseOptions.web) {
-    token = await messaging.getToken(
-      vapidKey: vapidKey,
-    );
-  } else {
-    token = await messaging.getToken();
-  }
-
-  if (kDebugMode) {
-    print('Registration Token=$token');
-  }
+  // if (DefaultFirebaseOptions.currentPlatform == DefaultFirebaseOptions.web) {
+  //   token = await messaging.getToken(
+  //     vapidKey: vapidKey,
+  //   );
+  // } else {
+  //   token = await messaging.getToken();
+  // }
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     if (kDebugMode) {
@@ -185,21 +157,20 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int index = 0;
 
-  Future<void> setupInteractedMessage() async {
-    RemoteMessage? initialMessage =
-        await FirebaseMessaging.instance.getInitialMessage();
+  // Future<void> setupInteractedMessage() async {
+  //   RemoteMessage? initialMessage =
+  //       await FirebaseMessaging.instance.getInitialMessage();
+  //   if (initialMessage != null) {
+  //     _handleMessage(initialMessage);
+  //   }
 
-    if (initialMessage != null) {
-      _handleMessage(initialMessage);
-    }
+  //   // Stream listener
+  //   FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+  // }
 
-    // Stream listener
-    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
-  }
-
-  void _handleMessage(RemoteMessage message) {
-    if (message.data['type'] == 'chat') {}
-  }
+  // void _handleMessage(RemoteMessage message) {
+  //   if (message.data['type'] == 'chat') {}
+  // }
 
   @override
   void initState() {
@@ -207,7 +178,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // Run code required to handle interacted messages in an async function
     // as initState() must not be async
-    setupInteractedMessage();
+    // setupInteractedMessage();
   }
 
   @override
