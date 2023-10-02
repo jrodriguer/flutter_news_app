@@ -2,8 +2,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class Token extends StatefulWidget {
-  const Token(this._builder, {super.key});
+class TokenMonitor extends StatefulWidget {
+  const TokenMonitor(this._builder, {super.key});
 
   final Widget Function(String? token) _builder;
 
@@ -11,7 +11,7 @@ class Token extends StatefulWidget {
   State<StatefulWidget> createState() => _Token();
 }
 
-class _Token extends State<Token> {
+class _Token extends State<TokenMonitor> {
   String? _token;
   late Stream<String> _tokenStream;
 
