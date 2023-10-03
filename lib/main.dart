@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:logging/logging.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:sizer/sizer.dart';
 
 import 'firebase_options.dart';
@@ -17,14 +16,10 @@ import 'views/favorites_screen.dart';
 import 'views/headers_screen.dart';
 import 'views/personal_screen.dart';
 
-final BehaviorSubject<RemoteMessage> _messageStreamController =
-    BehaviorSubject<RemoteMessage>();
-
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await setupFlutterNotifications();
-
-  // TODO: Show notifications
+  await setupNotifications();
+  showNotification(message);
 
   if (kDebugMode) {
     print("Handling a background message: ${message.messageId}");
@@ -37,7 +32,7 @@ late AndroidNotificationChannel channel;
 
 bool isFlutterLocalNotificationsInitialized = false;
 
-Future<void> setupFlutterNotifications() async {
+Future<void> setupNotifications() async {
   if (isFlutterLocalNotificationsInitialized) {
     return;
   }
@@ -69,6 +64,26 @@ Future<void> setupFlutterNotifications() async {
   isFlutterLocalNotificationsInitialized = true;
 }
 
+void showNotification(RemoteMessage message) {
+  RemoteNotification? notification = message.notification;
+  AndroidNotification? android = message.notification?.android;
+  if (notification != null && android != null && !kIsWeb) {
+    flutterLocalNotificationsPlugin.show(
+      notification.hashCode,
+      notification.title,
+      notification.body,
+      NotificationDetails(
+        android: AndroidNotificationDetails(
+          channel.id,
+          channel.name,
+          channelDescription: channel.description,
+          // icon: 'launch_background',
+        ),
+      ),
+    );
+  }
+}
+
 late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
 Future<void> main() async {
@@ -90,7 +105,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  // FirebaseMessaging messaging = FirebaseMessaging.instance;
 
   // if (DefaultFirebaseOptions.currentPlatform == DefaultFirebaseOptions.web) {
   //   token = await messaging.getToken(
@@ -100,15 +115,15 @@ Future<void> main() async {
   //   token = await messaging.getToken();
   // }
 
-  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    if (kDebugMode) {
-      print('Handling a foreground message: ${message.messageId}');
-      print('Message notification: ${message.notification?.title}');
-      print('Message notification: ${message.notification?.body}');
-    }
+  // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+  //   if (kDebugMode) {
+  //     print('Handling a foreground message: ${message.messageId}');
+  //     print('Message notification: ${message.notification?.title}');
+  //     print('Message notification: ${message.notification?.body}');
+  //   }
 
-    _messageStreamController.sink.add(message);
-  });
+  //   _messageStreamController.sink.add(message);
+  // });
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
@@ -117,8 +132,8 @@ Future<void> main() async {
     SystemUiMode.edgeToEdge,
   );
 
-  const String topic = 'all-users';
-  await messaging.subscribeToTopic(topic);
+  // const String topic = 'all-users';
+  // await messaging.subscribeToTopic(topic);
 
   runApp(
     DevicePreview(
