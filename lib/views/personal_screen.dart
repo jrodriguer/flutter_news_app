@@ -66,7 +66,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
         ),
         actions: <Widget>[
           PopupMenuButton(
-            // onSelected: onActionSelected,
+            onSelected: onActionSelected,
             itemBuilder: (BuildContext context) {
               return [
                 const PopupMenuItem(
