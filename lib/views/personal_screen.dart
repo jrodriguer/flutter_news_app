@@ -22,7 +22,10 @@ class _PersonalScreenState extends State<PersonalScreen> {
             padding: const EdgeInsets.all(20),
             child: Column(
               children: <Widget>[
-                const MetaCard('Permissions', Permissions()),
+                const MetaCard(
+                  'Permissions',
+                  Permissions(),
+                ),
                 MetaCard(
                   'FCM Token',
                   TokenMonitor((token) {
@@ -31,7 +34,9 @@ class _PersonalScreenState extends State<PersonalScreen> {
                         ? const CircularProgressIndicator()
                         : SelectableText(
                             token,
-                            style: const TextStyle(fontSize: 12),
+                            style: const TextStyle(
+                              fontSize: 14,
+                            ),
                           );
                   }),
                 ),

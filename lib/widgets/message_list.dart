@@ -24,7 +24,10 @@ class _MessageList extends State<MessageList> {
   @override
   Widget build(BuildContext context) {
     if (_messages.isEmpty) {
-      return const Text('No messages received');
+      return const Text(
+        'No messages received',
+        style: TextStyle(fontSize: 16),
+      );
     }
 
     return ListView.builder(
@@ -36,8 +39,9 @@ class _MessageList extends State<MessageList> {
           return ListTile(
             title: Text(
                 message.messageId ?? 'no RemoteMessage.messageId available'),
-            subtitle:
-            Text(message.sentTime?.toString() ?? DateTime.now().toString(),),
+            subtitle: Text(
+              message.sentTime?.toString() ?? DateTime.now().toString(),
+            ),
           );
         });
   }

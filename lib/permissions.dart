@@ -107,7 +107,7 @@ class _Permissions extends State<Permissions> {
         row('Sound', settingsMap[_settings.sound]!),
       ],
       ElevatedButton(
-          onPressed: checkPermissions, child: const Text('Reload Permissions')),
+          onPressed: checkPermissions, child: const Text('Reload Permissions', style: TextStyle(fontSize: 14),)),
     ]);
   }
 }

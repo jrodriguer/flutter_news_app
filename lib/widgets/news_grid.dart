@@ -40,15 +40,24 @@ class _NewsGridState extends State<NewsGrid> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsetsDirectional.only(start: 12, end: 12),
+            padding: const EdgeInsetsDirectional.only(
+              start: 12,
+              end: 12,
+            ),
             child: Text(
               article.title,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
           const SizedBox(height: 17),
           const Padding(
-            padding: EdgeInsets.symmetric(vertical: 7, horizontal: 15),
+            padding: EdgeInsets.symmetric(
+              vertical: 7,
+              horizontal: 15,
+            ),
             child: Divider(
               color: Colors.grey,
               height: 5,
@@ -124,8 +133,11 @@ class _NewsGridState extends State<NewsGrid> {
             onDoubleTap: () => _showNewsDetails(index),
             child: Container(
                 padding: const EdgeInsets.all(20),
-                decoration:
-                    BoxDecoration(border: Border.all(color: Colors.black)),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.black,
+                  ),
+                ),
                 child: Column(children: [
                   ClipRRect(
                     child: Image.network(
@@ -142,8 +154,10 @@ class _NewsGridState extends State<NewsGrid> {
                     ),
                   ),
                   Container(
-                      margin:
-                          const EdgeInsets.only(top: 14.976, bottom: 14.976),
+                      margin: const EdgeInsets.only(
+                        top: 14.976,
+                        bottom: 14.976,
+                      ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -152,7 +166,9 @@ class _NewsGridState extends State<NewsGrid> {
                             child: Text(
                               widget.news[index].title,
                               style: const TextStyle(
-                                  fontWeight: FontWeight.w700, fontSize: 16),
+                                fontWeight: FontWeight.w700,
+                                fontSize: 16,
+                              ),
                             ),
                           ),
                         ],

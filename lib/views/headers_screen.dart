@@ -49,9 +49,10 @@ class _HeadersScreenState extends State<HeadersScreen> {
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
-                title: const Text('Headers',
-                    style:
-                        TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
+                title: const Text(
+                  'Headers',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                ),
                 pinned: true,
                 floating: true,
                 bottom: TabBar(
@@ -59,7 +60,9 @@ class _HeadersScreenState extends State<HeadersScreen> {
                   tabs: tabMaker(),
                   labelColor: Helpers.hexToColor('#393E46'),
                   labelStyle: const TextStyle(
-                      fontSize: 16, fontStyle: FontStyle.normal),
+                    fontSize: 16,
+                    fontStyle: FontStyle.normal,
+                  ),
                   indicatorColor: Helpers.hexToColor('#393E46'),
                   indicatorWeight: 1.0,
                   onTap: (index) {
@@ -72,11 +75,14 @@ class _HeadersScreenState extends State<HeadersScreen> {
             ];
           },
           body: FutureBuilder<TopHeadlines>(
-            future: news.getTopHeadLinesCategory(tabsText[currentTabIndex]),
+            future: news.getTopHeadLinesCategory(
+              tabsText[currentTabIndex],
+            ),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(
-                    child: SpinKitRotatingPlain(color: Colors.black87));
+                  child: SpinKitRotatingPlain(color: Colors.black87),
+                );
               } else if (snapshot.hasError) {
                 _log.severe('${snapshot.error}');
                 return const Center(
@@ -88,6 +94,7 @@ class _HeadersScreenState extends State<HeadersScreen> {
                 ));
               } else if (snapshot.hasData) {
                 List<Article> fixedArticlesList = snapshot.data!.articles;
+
                 fixedArticlesList
                     .removeWhere((article) => article.title == '[Removed]');
 

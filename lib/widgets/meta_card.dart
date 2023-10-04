@@ -12,24 +12,19 @@ class MetaCard extends StatelessWidget {
       width: double.infinity,
       margin: const EdgeInsets.only(bottom: 16),
       child: Card(
-        elevation: 0,
-        // shape: RoundedRectangleBorder(
-        //   side: BorderSide(
-        //     color: Theme.of(context).colorScheme.outline
-        //   ),
-        //
-        //     borderRadius: const BorderRadius.all(Radius.zero),
-        // ),
         color: Theme.of(context).colorScheme.surfaceVariant,
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
             children: <Widget>[
               Container(
-                margin: const EdgeInsets.only(bottom: 16),
+                margin: const EdgeInsets.only(bottom: 14.976),
                 child: Text(
                   _title,
-                  style: const TextStyle(fontSize: 16),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  ),
                 ),
               ),
               _children,
