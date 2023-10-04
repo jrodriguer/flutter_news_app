@@ -10,8 +10,17 @@ class MetaCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: const EdgeInsets.only(left: 8, right: 8, top: 8),
+      margin: const EdgeInsets.only(bottom: 16),
       child: Card(
+        elevation: 0,
+        // shape: RoundedRectangleBorder(
+        //   side: BorderSide(
+        //     color: Theme.of(context).colorScheme.outline
+        //   ),
+        //
+        //     borderRadius: const BorderRadius.all(Radius.zero),
+        // ),
+        color: Theme.of(context).colorScheme.surfaceVariant,
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
