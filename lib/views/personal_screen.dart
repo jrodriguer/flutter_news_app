@@ -18,24 +18,28 @@ class _PersonalScreenState extends State<PersonalScreen> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          const MetaCard('Permissions', Permissions()),
-          MetaCard(
-            'FCM Token',
-            TokenMonitor((token) {
-              _token = token;
-              return token == null
-                  ? const CircularProgressIndicator()
-                  : SelectableText(
-                token,
-                style: const TextStyle(fontSize: 12),
-              );
-            }),
-          ),
-          const MetaCard('Message Stream', MessageList(),)
-        ],
-      )
-    );
+        child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: <Widget>[
+                const MetaCard('Permissions', Permissions()),
+                MetaCard(
+                  'FCM Token',
+                  TokenMonitor((token) {
+                    _token = token;
+                    return token == null
+                        ? const CircularProgressIndicator()
+                        : SelectableText(
+                            token,
+                            style: const TextStyle(fontSize: 12),
+                          );
+                  }),
+                ),
+                const MetaCard(
+                  'Message Stream',
+                  MessageList(),
+                )
+              ],
+            )));
   }
 }
