@@ -22,7 +22,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   showNotification(message);
 
   if (kDebugMode) {
-    print("Handling a background message: ${message.messageId}");
+    print('Handling a background message: ${message.messageId}');
     print('Message notification: ${message.notification?.title}');
     print('Message notification: ${message.notification?.body}');
   }
@@ -77,7 +77,7 @@ void showNotification(RemoteMessage message) {
           channel.id,
           channel.name,
           channelDescription: channel.description,
-          // icon: 'launch_background',
+          icon: 'launch_background',
         ),
       ),
     );
@@ -104,36 +104,16 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  // FirebaseMessaging messaging = FirebaseMessaging.instance;
-
-  // if (DefaultFirebaseOptions.currentPlatform == DefaultFirebaseOptions.web) {
-  //   token = await messaging.getToken(
-  //     vapidKey: vapidKey,
-  //   );
-  // } else {
-  //   token = await messaging.getToken();
-  // }
-
-  // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-  //   if (kDebugMode) {
-  //     print('Handling a foreground message: ${message.messageId}');
-  //     print('Message notification: ${message.notification?.title}');
-  //     print('Message notification: ${message.notification?.body}');
-  //   }
-
-  //   _messageStreamController.sink.add(message);
-  // });
-
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  if(!kIsWeb) {
+    await setupNotifications();
+  }
 
   _log.info('Going full screen');
   SystemChrome.setEnabledSystemUIMode(
     SystemUiMode.edgeToEdge,
   );
-
-  // const String topic = 'all-users';
-  // await messaging.subscribeToTopic(topic);
 
   runApp(
     DevicePreview(
@@ -170,28 +150,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int index = 0;
 
-  // Future<void> setupInteractedMessage() async {
-  //   RemoteMessage? initialMessage =
-  //       await FirebaseMessaging.instance.getInitialMessage();
-  //   if (initialMessage != null) {
-  //     _handleMessage(initialMessage);
-  //   }
-
-  //   // Stream listener
-  //   FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
-  // }
-
-  // void _handleMessage(RemoteMessage message) {
-  //   if (message.data['type'] == 'chat') {}
-  // }
-
   @override
   void initState() {
     super.initState();
-
-    // Run code required to handle interacted messages in an async function
-    // as initState() must not be async
-    // setupInteractedMessage();
   }
 
   @override
