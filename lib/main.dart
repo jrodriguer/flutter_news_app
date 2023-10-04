@@ -106,7 +106,7 @@ Future<void> main() async {
   );
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-  if(!kIsWeb) {
+  if (!kIsWeb) {
     await setupNotifications();
   }
 
@@ -149,10 +149,27 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int index = 0;
+  String? initialMessage;
+  bool _resolved = false;
 
   @override
   void initState() {
     super.initState();
+
+    FirebaseMessaging.instance.getInitialMessage().then(
+          (value) => setState(
+            () {
+              _resolved = true;
+              initialMessage = value?.data.toString();
+            },
+          ),
+        );
+
+    FirebaseMessaging.onMessage.listen(showNotification);
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('A new onMessageOpenedApp event was published!');
+    });
   }
 
   @override
