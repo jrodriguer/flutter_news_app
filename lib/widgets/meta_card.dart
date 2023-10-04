@@ -27,7 +27,10 @@ class MetaCard extends StatelessWidget {
             children: <Widget>[
               Container(
                 margin: const EdgeInsets.only(bottom: 16),
-                child: Text(_title, style: const TextStyle(fontSize: 16),),
+                child: Text(
+                  _title,
+                  style: const TextStyle(fontSize: 16),
+                ),
               ),
               _children,
             ],
