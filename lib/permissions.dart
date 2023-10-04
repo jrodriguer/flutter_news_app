@@ -53,7 +53,10 @@ class _Permissions extends State<Permissions> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('$title:', style: const TextStyle(fontWeight: FontWeight.bold)),
+          Text(
+            '$title:',
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
           Text(value),
         ],
       ),
@@ -90,8 +93,9 @@ class _Permissions extends State<Permissions> {
 
     if (!_requested) {
       return ElevatedButton(
-          onPressed: requestPermissions,
-          child: const Text('Request Permissions'));
+        onPressed: requestPermissions,
+        child: const Text('Request Permissions'),
+      );
     }
 
     return Column(children: [
@@ -107,7 +111,12 @@ class _Permissions extends State<Permissions> {
         row('Sound', settingsMap[_settings.sound]!),
       ],
       ElevatedButton(
-          onPressed: checkPermissions, child: const Text('Reload Permissions', style: TextStyle(fontSize: 14),)),
+        onPressed: checkPermissions,
+        child: const Text(
+          'Reload Permissions',
+          style: TextStyle(fontSize: 14),
+        ),
+      ),
     ]);
   }
 }
