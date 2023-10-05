@@ -22,21 +22,14 @@ class _Permissions extends State<Permissions> {
     NotificationSettings settings =
         await FirebaseMessaging.instance.requestPermission(
       alert: true,
-      announcement: false,
+      announcement: true,
       badge: true,
-      criticalAlert: false,
-      provisional: false,
       sound: true,
     );
 
     if (kDebugMode) {
       if (settings.authorizationStatus == AuthorizationStatus.authorized) {
         print('User granted permission');
-      } else if (settings.authorizationStatus ==
-          AuthorizationStatus.provisional) {
-        print('User granted provisional permission');
-      } else {
-        print('User declined or has not accepted permission');
       }
     }
 
