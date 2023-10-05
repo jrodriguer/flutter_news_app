@@ -21,11 +21,9 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await setupNotifications();
   showNotification(message);
 
-  if (kDebugMode) {
-    print('Handling a background message: ${message.messageId}');
-    print('Message notification: ${message.notification?.title}');
-    print('Message notification: ${message.notification?.body}');
-  }
+  _log.info('Handling a background message: ${message.messageId}');
+  _log.info('Message notification: ${message.notification?.title}');
+  _log.info('Message notification: ${message.notification?.body}');
 }
 
 late AndroidNotificationChannel channel;
@@ -77,7 +75,7 @@ void showNotification(RemoteMessage message) {
           channel.id,
           channel.name,
           channelDescription: channel.description,
-          icon: 'launch_background',
+          // icon: 'launch_background',
         ),
       ),
     );
@@ -150,7 +148,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int index = 0;
   String? initialMessage;
-  bool _resolved = false;
+  // bool _resolved = false;
 
   @override
   void initState() {
@@ -159,7 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
     FirebaseMessaging.instance.getInitialMessage().then(
           (value) => setState(
             () {
-              _resolved = true;
+              // _resolved = true;
               initialMessage = value?.data.toString();
             },
           ),
@@ -168,7 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
     FirebaseMessaging.onMessage.listen(showNotification);
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('A new onMessageOpenedApp event was published!');
+      _log.info('A new onMessageOpenedApp event was published!');
     });
   }
 
@@ -189,7 +187,7 @@ class _MyHomePageState extends State<MyHomePage> {
         currentIndex: index,
         onTap: (i) {
           _log.info(
-              () => 'Clicked on bottom navigation bar, index position: $i');
+              () => 'Clicked on bottom navigation bar, index position: $i.');
           setState(() {
             index = i;
           });
