@@ -1,11 +1,11 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_news_app/permissions.dart';
 import 'package:flutter_news_app/token_monitor.dart';
 import 'package:flutter_news_app/widgets/message_list.dart';
 import 'package:flutter_news_app/widgets/meta_card.dart';
+import 'package:logging/logging.dart';
 
 class PersonalScreen extends StatefulWidget {
   const PersonalScreen({super.key});
@@ -15,39 +15,36 @@ class PersonalScreen extends StatefulWidget {
 }
 
 class _PersonalScreenState extends State<PersonalScreen> {
+  static final _log = Logger('PersonalScreen');
+
   String? _token;
 
   Future<void> onActionSelected(String value) async {
     switch (value) {
       case 'subscribe':
         {
-          print(
-              'FlutterFire Messaging Example: Subscribing to topic "fcm_test".');
           await FirebaseMessaging.instance.subscribeToTopic('all_users');
-          print(
-              'FlutterFire Messaging Example: Subscribing to topic "all_users" successful.');
+          _log.fine(
+                  () => 'FlutterFire Messaging subscribing to topic "all_users" successfully.');
         }
         break;
       case 'unsubscribe':
         {
-          print(
-              'FlutterFire Messaging Example: Unsubscribing from topic "fcm_test".');
           await FirebaseMessaging.instance.unsubscribeFromTopic('all_users');
-          print(
-              'FlutterFire Messaging Example: Unsubscribing from topic "all_users" successful.');
+          _log.fine(
+                  () => 'FlutterFire Messaging unsubscribing to topic "all_users" successfully.');
         }
         break;
       case 'get_apns_token':
         {
           if (defaultTargetPlatform == TargetPlatform.iOS ||
               defaultTargetPlatform == TargetPlatform.macOS) {
-            print('FlutterFire Messaging Example: Getting APNs token...');
+            _log.info('FlutterFire Messaging Example: Getting APNs token...');
             String? token = await FirebaseMessaging.instance.getAPNSToken();
-            print('FlutterFire Messaging Example: Got APNs token: $token');
+            _log.fine(
+                    () => 'FlutterFire Messaging Example: Got APNs token: $token');
           } else {
-            print(
-              'FlutterFire Messaging Example: Getting an APNs token is only supported on iOS and macOS platforms.',
-            );
+           _log.severe('FlutterFire Messaging Example: Getting an APNs token is only supported on iOS and macOS platforms.');
           }
         }
         break;
