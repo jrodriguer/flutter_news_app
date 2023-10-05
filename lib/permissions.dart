@@ -31,7 +31,6 @@ class _Permissions extends State<Permissions> {
       provisional: false,
       sound: true,
     );
-    _log.info('The notification settings it is as follows = $settings');
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
       _log.fine('User granted permission');
     }
