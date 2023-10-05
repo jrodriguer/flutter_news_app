@@ -25,16 +25,17 @@ class _PersonalScreenState extends State<PersonalScreen> {
         {
           _log.info('FlutterFire Messaging subscribing to topic "all_users".');
           await FirebaseMessaging.instance.subscribeToTopic('all_users');
-          _log.fine(
-                  () => 'FlutterFire Messaging subscribing to topic "all_users" successfully.');
+          _log.info(
+              'FlutterFire Messaging subscribing to topic "all_users" successfully.');
         }
         break;
       case 'unsubscribe':
         {
-          _log.info('FlutterFire Messaging unsubscribing from topic "all_users".');
+          _log.info(
+              'FlutterFire Messaging unsubscribing from topic "all_users".');
           await FirebaseMessaging.instance.unsubscribeFromTopic('all_users');
-          _log.fine(
-                  () => 'FlutterFire Messaging unsubscribing to topic "all_users" successfully.');
+          _log.info(
+              'FlutterFire Messaging unsubscribing to topic "all_users" successfully.');
         }
         break;
       case 'get_apns_token':
@@ -43,10 +44,10 @@ class _PersonalScreenState extends State<PersonalScreen> {
               defaultTargetPlatform == TargetPlatform.macOS) {
             _log.info('FlutterFire Messaging getting APNs token...');
             String? token = await FirebaseMessaging.instance.getAPNSToken();
-            _log.fine(
-                    () => 'FlutterFire Messaging got APNs token: $token');
+            _log.info('FlutterFire Messaging got APNs token: $token');
           } else {
-           _log.severe('FlutterFire Messaging getting an APNs token is only supported on iOS and macOS platforms.');
+            _log.severe(
+                'FlutterFire Messaging getting an APNs token is only supported on iOS and macOS platforms.');
           }
         }
         break;
@@ -118,6 +119,7 @@ class _PersonalScreenState extends State<PersonalScreen> {
       ),
     );
   }
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);

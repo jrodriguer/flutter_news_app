@@ -32,7 +32,7 @@ class _Permissions extends State<Permissions> {
       sound: true,
     );
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      _log.fine('User granted permission');
+      _log.info('User granted permission');
     }
 
     setState(() {

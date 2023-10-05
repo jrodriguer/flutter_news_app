@@ -17,13 +17,13 @@ import 'views/headers_screen.dart';
 import 'views/personal_screen.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await setupNotifications();
-  showNotification(message);
-
   _log.info('Handling a background message: ${message.messageId}');
   _log.info('Message notification: ${message.notification?.title}');
   _log.info('Message notification: ${message.notification?.body}');
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await setupNotifications();
+  showNotification(message);
 }
 
 late AndroidNotificationChannel channel;
@@ -75,7 +75,7 @@ void showNotification(RemoteMessage message) {
           channel.id,
           channel.name,
           channelDescription: channel.description,
-          // icon: 'launch_background',
+          icon: 'launch_background',
         ),
       ),
     );
@@ -148,7 +148,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int index = 0;
   String? initialMessage;
-  // bool _resolved = false;
+  bool _resolved = false;
 
   @override
   void initState() {
@@ -157,7 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
     FirebaseMessaging.instance.getInitialMessage().then(
           (value) => setState(
             () {
-              // _resolved = true;
+              _resolved = true;
               initialMessage = value?.data.toString();
             },
           ),
