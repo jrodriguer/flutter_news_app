@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 
 class Permissions extends StatefulWidget {
   const Permissions({super.key});
@@ -10,6 +11,8 @@ class Permissions extends StatefulWidget {
 }
 
 class _Permissions extends State<Permissions> {
+  static final _log = Logger('Permissions');
+
   bool _requested = false;
   bool _fetching = false;
   late NotificationSettings _settings;
@@ -22,15 +25,15 @@ class _Permissions extends State<Permissions> {
     NotificationSettings settings =
         await FirebaseMessaging.instance.requestPermission(
       alert: true,
-      announcement: true,
+      announcement: false,
       badge: true,
+      criticalAlert: false,
+      provisional: false,
       sound: true,
     );
-
-    if (kDebugMode) {
-      if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-        print('User granted permission');
-      }
+    _log.info('The notification settings it is as follows = $settings');
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      _log.fine('User granted permission');
     }
 
     setState(() {
