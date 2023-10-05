@@ -17,7 +17,7 @@ class _Token extends State<TokenMonitor> {
 
   void setToken(String? token) {
     if (kDebugMode) {
-      print('Registration Token=$token');
+      print('Registration Token = $token');
     }
     setState(() {
       _token = token;
