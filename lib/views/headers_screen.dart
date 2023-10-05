@@ -16,6 +16,7 @@ class HeadersScreen extends StatefulWidget {
 
 class _HeadersScreenState extends State<HeadersScreen> {
   static final _log = Logger('HeadersScreen');
+
   final List<String> tabsText = <String>[
     'business',
     'entertainment',

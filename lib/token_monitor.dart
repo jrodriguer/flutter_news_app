@@ -1,6 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 
 class TokenMonitor extends StatefulWidget {
   const TokenMonitor(this._builder, {super.key});
@@ -12,13 +12,14 @@ class TokenMonitor extends StatefulWidget {
 }
 
 class _Token extends State<TokenMonitor> {
+  static final _log = Logger('TokenMonitor');
+
   String? _token;
   late Stream<String> _tokenStream;
 
   void setToken(String? token) {
-    if (kDebugMode) {
-      print('Registration Token = $token');
-    }
+    _log.info('Registration Token = $token');
+
     setState(() {
       _token = token;
     });

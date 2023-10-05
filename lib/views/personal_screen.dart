@@ -118,4 +118,10 @@ class _PersonalScreenState extends State<PersonalScreen> {
       ),
     );
   }
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    _log.info('Debug fill properties for Device token = $_token');
+    properties.add(StringProperty('_token', _token));
+  }
 }
