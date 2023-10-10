@@ -8,10 +8,10 @@ class TokenMonitor extends StatefulWidget {
   final Widget Function(String? token) _builder;
 
   @override
-  State<StatefulWidget> createState() => _Token();
+  State<StatefulWidget> createState() => _TokenState();
 }
 
-class _Token extends State<TokenMonitor> {
+class _TokenState extends State<TokenMonitor> {
   static final _log = Logger('TokenMonitor');
 
   String? _token;

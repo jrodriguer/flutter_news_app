@@ -5,10 +5,10 @@ class MessageList extends StatefulWidget {
   const MessageList({super.key});
 
   @override
-  State<StatefulWidget> createState() => _MessageList();
+  State<StatefulWidget> createState() => _MessageListState();
 }
 
-class _MessageList extends State<MessageList> {
+class _MessageListState extends State<MessageList> {
   List<RemoteMessage> _messages = [];
 
   @override

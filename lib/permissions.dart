@@ -2,15 +2,16 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class Permissions extends StatefulWidget {
   const Permissions({super.key});
 
   @override
-  State<StatefulWidget> createState() => _Permissions();
+  State<StatefulWidget> createState() => _PermissionsState();
 }
 
-class _Permissions extends State<Permissions> {
+class _PermissionsState extends State<Permissions> {
   static final _log = Logger('Permissions');
 
   bool _requested = false;
@@ -18,6 +19,15 @@ class _Permissions extends State<Permissions> {
   late NotificationSettings _settings;
 
   Future<void> requestPermissions() async {
+    const Permission permission = Permission.notification;
+
+    permission.isDenied.then(
+      (value) => {
+        _log.info(value),
+        if (value) {permission.request()}
+      },
+    );
+
     setState(() {
       _fetching = true;
     });
