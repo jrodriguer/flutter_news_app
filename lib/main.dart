@@ -9,7 +9,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:logging/logging.dart';
 import 'package:sizer/sizer.dart';
-
 import 'firebase_options.dart';
 import 'helpers/helpers.dart';
 import 'views/favorites_screen.dart';
@@ -131,7 +130,10 @@ class MyApp extends StatelessWidget {
     return Sizer(builder: (context, orientation, deviceType) {
       return MaterialApp(
         title: 'Flutter Demo',
-        theme: ThemeData(useMaterial3: true, fontFamily: 'OpenSans'),
+        theme: ThemeData(
+          useMaterial3: true,
+          fontFamily: 'OpenSans',
+        ),
         home: const MyHomePage(),
       );
     });
